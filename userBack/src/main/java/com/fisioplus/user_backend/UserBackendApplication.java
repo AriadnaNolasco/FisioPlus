@@ -11,7 +11,3 @@ public class UserBackendApplication {
     }
 
 }
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
