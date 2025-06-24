@@ -16,7 +16,7 @@ public class ProgresoController {
     private final ProgresoService progresoService;
 
     @GetMapping("/paciente/{id}")
-    public List<ProgresoDTO> listarPorPaciente(@PathVariable Long id) {
+    public List<ProgresoDTO> listarPorPaciente(@PathVariable Integer id) {
         return progresoService.listarPorPaciente(id);
     }
 

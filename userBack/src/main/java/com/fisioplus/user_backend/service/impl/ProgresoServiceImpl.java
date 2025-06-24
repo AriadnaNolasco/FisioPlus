@@ -37,7 +37,7 @@ public class ProgresoServiceImpl implements ProgresoService {
     }
 
     @Override
-    public List<ProgresoDTO> listarPorPaciente(Long pacienteId) {
+    public List<ProgresoDTO> listarPorPaciente(Integer pacienteId) {
         return progresoRepo.findByPacienteId(pacienteId).stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());

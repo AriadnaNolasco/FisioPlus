@@ -12,7 +12,7 @@ public class ProgresoDTO {
     private Long id;
 
     @NotNull
-    private Long pacienteId;
+    private Integer pacienteId;
 
     @NotNull
     private LocalDate fecha;
