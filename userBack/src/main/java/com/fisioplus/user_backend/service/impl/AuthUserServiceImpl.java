@@ -1,9 +1,9 @@
-package com.garmyshop.user_backend.service.impl; // o .service
+package com.fisioplus.user_backend.service.impl; // o .service
 
-import com.garmyshop.user_backend.dto.RegistroRequestDTO;
-import com.garmyshop.user_backend.dto.UsuarioDTO;
-import com.garmyshop.user_backend.entity.AuthUser;
-import com.garmyshop.user_backend.repository.AuthUserRepository;
+import com.fisioplus.user_backend.dto.RegistroRequestDTO;
+import com.fisioplus.user_backend.dto.UsuarioDTO;
+import com.fisioplus.user_backend.entity.AuthUser;
+import com.fisioplus.user_backend.repository.AuthUserRepository;
 import com.garmyshop.user_backend.service.AuthUserService;
 import org.springframework.security.core.GrantedAuthority; // Para roles/autoridades
 import org.springframework.security.core.authority.SimpleGrantedAuthority; // Para roles/autoridades

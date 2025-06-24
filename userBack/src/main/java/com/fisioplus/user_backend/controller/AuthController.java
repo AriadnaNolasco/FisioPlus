@@ -1,11 +1,12 @@
-package com.garmyshop.user_backend.controller;
+package com.fisioplus.user_backend.controller;
 
-import com.garmyshop.user_backend.dto.AuthResponseDTO;
-import com.garmyshop.user_backend.dto.LoginRequestDTO;
-import com.garmyshop.user_backend.dto.RegistroRequestDTO;
-import com.garmyshop.user_backend.dto.UsuarioDTO;
-import com.garmyshop.user_backend.entity.AuthUser;
-import com.garmyshop.user_backend.security.JwtTokenProvider;
+
+import com.fisioplus.user_backend.dto.AuthResponseDTO;
+import com.fisioplus.user_backend.dto.LoginRequestDTO;
+import com.fisioplus.user_backend.dto.RegistroRequestDTO;
+import com.fisioplus.user_backend.dto.UsuarioDTO;
+import com.fisioplus.user_backend.entity.AuthUser;
+import com.fisioplus.user_backend.security.JwtTokenProvider;
 import com.garmyshop.user_backend.service.AuthUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

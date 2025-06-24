@@ -1,6 +1,7 @@
-package com.garmyshop.user_backend.repository;
+package com.fisioplus.user_backend.repository;
 
-import com.garmyshop.user_backend.entity.AuthUser;
+
+import com.fisioplus.user_backend.entity.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

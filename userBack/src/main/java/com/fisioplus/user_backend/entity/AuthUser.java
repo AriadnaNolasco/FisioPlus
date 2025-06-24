@@ -1,4 +1,5 @@
-package com.garmyshop.user_backend.entity;
+package com.fisioplus.user_backend.entity;
+
 
 import jakarta.persistence.*;
 import lombok.*;

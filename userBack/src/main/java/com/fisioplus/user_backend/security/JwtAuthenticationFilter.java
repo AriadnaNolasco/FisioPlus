@@ -1,4 +1,5 @@
-package com.garmyshop.user_backend.security;
+package com.fisioplus.user_backend.security;
+
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-configpackage com.garmyshop.user_backend.security;
+package com.fisioplus.user_backend.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -25,11 +25,12 @@ public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("${garmyshop.app.jwtSecret}")
+    @Value("${fisioplus.app.jwtSecret}")
     private String jwtSecretString;
 
-    @Value("${garmyshop.app.jwtExpirationMs}")
+    @Value("${fisioplus.app.jwtExpirationMs}")
     private int jwtExpirationMs;
+
 
     private SecretKey key; // Usar la interfaz SecretKey
     private JwtParser jwtParser; // Guardar una instancia del parser

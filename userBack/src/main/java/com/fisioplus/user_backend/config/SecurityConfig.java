@@ -1,6 +1,6 @@
-AuthController.javapackage com.garmyshop.user_backend.config;
+package com.fisioplus.user_backend.config;
 
-import com.garmyshop.user_backend.security.JwtAuthenticationFilter; // <<< DESCOMENTA O AÑADE ESTE IMPORT
+import com.fisioplus.user_backend.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -14,10 +14,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter; // <<< DESCOMENTA O AÑADE ESTE IMPORT
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.Arrays;
 
 @Configuration
@@ -25,10 +26,9 @@ import java.util.Arrays;
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter; // Declara el campo
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    // Constructor para inyectar el filtro
-    public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter) { // <<< MODIFICADO: Inyecta el filtro
+    public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -60,21 +60,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/api/auth/**").permitAll() // /registro y /login son públicos
-                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/marcas/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/colores/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/tallas/**").permitAll()
-                    .anyRequest().authenticated() // Todas las demás, incluyendo /api/auth/perfil, requieren autenticación
-            )
-            // VVVV ESTA ES LA LÍNEA CRUCIAL QUE FALTABA ACTIVAR VVVV
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Añade tu filtro JWT
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> authorize
+                        // Rutas públicas
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
+
+                        // Aquí puedes permitir temporalmente algunos endpoints de prueba
+                        // .requestMatchers(HttpMethod.GET, "/api/ejercicios/**").permitAll()
+
+                        // Todas las demás rutas requieren autenticación
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

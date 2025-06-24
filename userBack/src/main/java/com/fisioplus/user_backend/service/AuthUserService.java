@@ -1,8 +1,8 @@
-package com.garmyshop.user_backend.service;
+package com.fisioplus.user_backend.service;
 
-import com.garmyshop.user_backend.dto.RegistroRequestDTO;
-import com.garmyshop.user_backend.dto.UsuarioDTO;
-import com.garmyshop.user_backend.entity.AuthUser; // Podríamos necesitar devolver la entidad en algún caso interno
+import com.fisioplus.user_backend.dto.RegistroRequestDTO;
+import com.fisioplus.user_backend.dto.UsuarioDTO;
+import com.fisioplus.user_backend.entity.AuthUser; // Podríamos necesitar devolver la entidad en algún caso interno
 
 import java.util.Optional;
 

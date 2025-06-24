@@ -1,4 +1,5 @@
-package com.garmyshop.user_backend.dto;
+package com.fisioplus.user_backend.dto;
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
