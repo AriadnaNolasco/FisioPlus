@@ -7,7 +7,7 @@ import com.fisioplus.user_backend.dto.RegistroRequestDTO;
 import com.fisioplus.user_backend.dto.UsuarioDTO;
 import com.fisioplus.user_backend.entity.AuthUser;
 import com.fisioplus.user_backend.security.JwtTokenProvider;
-import com.garmyshop.user_backend.service.AuthUserService;
+import com.fisioplus.user_backend.service.AuthUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
