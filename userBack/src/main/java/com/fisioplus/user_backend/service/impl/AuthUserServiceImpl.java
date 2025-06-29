@@ -1,3 +1,4 @@
+// --- AuthUserServiceImpl.java ---
 package com.fisioplus.user_backend.service.impl;
 
 import com.fisioplus.user_backend.dto.RegistroRequestDTO;
@@ -46,8 +47,24 @@ public class AuthUserServiceImpl implements AuthUserService, UserDetailsService 
         nuevoUsuario.setPassword(passwordEncoder.encode(registroRequestDTO.getPassword()));
         nuevoUsuario.setFirstName(registroRequestDTO.getFirstName());
         nuevoUsuario.setLastName(registroRequestDTO.getLastName());
+        nuevoUsuario.setActive(true);
+        nuevoUsuario.setStaff(false);
+        nuevoUsuario.setSuperuser(false);
+        nuevoUsuario.setDateJoined(LocalDateTime.now());
+        nuevoUsuario.setLastLogin(null);
 
-        // Campos obligatorios no incluidos en el DTO
+        return authUserRepository.save(nuevoUsuario);
+    }
+
+    @Override
+    @Transactional
+    public AuthUser registrarUsuarioDesdeGoogle(RegistroRequestDTO dto) {
+        AuthUser nuevoUsuario = new AuthUser();
+        nuevoUsuario.setUsername(dto.getUsername());
+        nuevoUsuario.setEmail(dto.getEmail());
+        nuevoUsuario.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
+        nuevoUsuario.setFirstName(dto.getFirstName());
+        nuevoUsuario.setLastName(dto.getLastName());
         nuevoUsuario.setActive(true);
         nuevoUsuario.setStaff(false);
         nuevoUsuario.setSuperuser(false);
@@ -76,7 +93,6 @@ public class AuthUserServiceImpl implements AuthUserService, UserDetailsService 
                 .map(this::convertirAUsuarioDTO);
     }
 
-    // --- Implementación de UserDetailsService ---
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
@@ -91,8 +107,6 @@ public class AuthUserServiceImpl implements AuthUserService, UserDetailsService 
         if (authUser.isStaff()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_STAFF"));
         }
-
-        // Rol por defecto para todos los usuarios
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new User(
@@ -106,7 +120,6 @@ public class AuthUserServiceImpl implements AuthUserService, UserDetailsService 
         );
     }
 
-    // --- Helper DTO Mapper ---
     private UsuarioDTO convertirAUsuarioDTO(AuthUser authUser) {
         if (authUser == null) return null;
         return new UsuarioDTO(
