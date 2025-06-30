@@ -1,0 +1,25 @@
+# Directorios de entorno virtual
+venv/
+env/
+*.sqlite3
+
+# Archivos de caché y compilación
+__pycache__/
+*.pyc
+*.log
+*.pot
+
+# Archivos de la IDE (por ejemplo, de PyCharm)
+.idea/
+.vscode/
+
+# Archivos de configuración sensible
+.env
+secret_key.py
+settings_local.py
+
+# Archivos de macOS
+.DS_Store
+
+# Archivos de la carpeta 'media' subidos por usuarios
+media/
