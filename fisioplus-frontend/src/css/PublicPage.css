@@ -26,7 +26,11 @@
   font-family: 'Centra', sans-serif;
   
   
+  
 }
+
+
+
 
 .public-page {
   padding: 160px 0 100px 0;
@@ -174,6 +178,7 @@
 /* Compatibilidad con Bootstrap */
 .align-items-center {
   align-items: center;
+
 }
 
 
