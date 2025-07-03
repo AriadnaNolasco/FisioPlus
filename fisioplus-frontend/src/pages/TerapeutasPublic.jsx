@@ -2,6 +2,7 @@
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import bannerbg from '../assets/img/banner-bg.png';
 
 const TerapeutasPublic = () => {
   return (
@@ -10,8 +11,13 @@ const TerapeutasPublic = () => {
         .public-page-container {
           max-width: 1000px;
           margin: 4rem auto;
-          padding: 0 1.5rem;
+          padding: 2rem 1.5rem;
           font-family: 'Segoe UI', sans-serif;
+          background-color: rgba(255, 255, 255, 0.9);
+          border-radius: 16px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+          position: relative;
+          z-index: 1;
         }
 
         .hero-section {
@@ -72,41 +78,56 @@ const TerapeutasPublic = () => {
             font-size: 2rem;
           }
         }
+
+        .background-wrapper {
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          min-height: 100vh;
+          padding: 2rem 0;
+        }
       `}</style>
 
       <Navbar />
 
-      <div className="public-page-container">
-        <section className="hero-section">
-          <h1>Conoce a Nuestros Terapeutas</h1>
-          <p>Profesionales comprometidos con tu salud física y bienestar</p>
-        </section>
+      <div
+      
+        className="background-wrapper"
+        style={{ backgroundImage: `url(${bannerbg})` }}
+      >
+        <div className="public-page-container">
+          <section className="hero-section">
+            <h1>Conoce a Nuestros Terapeutas</h1>
+            <p>Profesionales comprometidos con tu salud física y bienestar</p>
+          </section>
 
-        <section className="therapist-grid">
-          <div className="therapist-card">
-            <img src="/images/terapeuta1.jpg" alt="Dra. Ana López" />
-            <h3>Dra. Ana López</h3>
-            <p>Especialista en Fisioterapia Neurológica. 10+ años de experiencia con pacientes con ACV y Parkinson.</p>
-          </div>
+          <section className="therapist-grid">
+            <div className="therapist-card">
+              <img src="/images/terapeuta1.jpg" alt="Dra. Ana López" />
+              <h3>Dra. Ana López</h3>
+              <p>Especialista en Fisioterapia Neurológica. 10+ años de experiencia con pacientes con ACV y Parkinson.</p>
+            </div>
 
-          <div className="therapist-card">
-            <img src="/images/terapeuta2.jpg" alt="Lic. Marco Pérez" />
-            <h3>Lic. Marco Pérez</h3>
-            <p>Fisioterapeuta Deportivo. Apoya a deportistas profesionales y aficionados en recuperación de lesiones.</p>
-          </div>
+            <div className="therapist-card">
+              <img src="/images/terapeuta2.jpg" alt="Lic. Marco Pérez" />
+              <h3>Lic. Marco Pérez</h3>
+              <p>Fisioterapeuta Deportivo. Apoya a deportistas profesionales y aficionados en recuperación de lesiones.</p>
+            </div>
 
-          <div className="therapist-card">
-            <img src="/images/terapeuta3.jpg" alt="Dra. Sofía Ramírez" />
-            <h3>Dra. Sofía Ramírez</h3>
-            <p>Experta en Salud Pélvica y rehabilitación postparto. Atención integral y con enfoque confidencial.</p>
-          </div>
+            <div className="therapist-card">
+              <img src="/images/terapeuta3.jpg" alt="Dra. Sofía Ramírez" />
+              <h3>Dra. Sofía Ramírez</h3>
+              <p>Experta en Salud Pélvica y rehabilitación postparto. Atención integral y con enfoque confidencial.</p>
+            </div>
 
-          <div className="therapist-card">
-            <img src="/images/terapeuta4.jpg" alt="Lic. Javier Medina" />
-            <h3>Lic. Javier Medina</h3>
-            <p>Especialista en adultos mayores y fisioterapia respiratoria. Enfoque preventivo y funcional.</p>
-          </div>
-        </section>
+            <div className="therapist-card">
+              <img src="/images/terapeuta4.jpg" alt="Lic. Javier Medina" />
+              <h3>Lic. Javier Medina</h3>
+              <p>Especialista en adultos mayores y fisioterapia respiratoria. Enfoque preventivo y funcional.</p>
+            </div>
+          </section>
+        </div>
       </div>
 
       <Footer />

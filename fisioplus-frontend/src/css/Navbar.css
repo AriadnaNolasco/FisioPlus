@@ -1,3 +1,22 @@
+/************ Custom Font ************/
+@font-face {
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Book.ttf');
+  font-weight: 400;
+}
+
+
+
 /************ Navbar Css ************/
 nav.navbar {
   padding: 18px 0;
@@ -6,34 +25,55 @@ nav.navbar {
   top: 0;
   z-index: 9999;
   transition: 0.32s ease-in-out;
+  background-color: transparent;
+  color: #fff;
+}
+
+nav.navbar a,
+nav.navbar .navbar-brand,
+nav.navbar .navbar-link {
+  color: #fff !important;
+  transition: color 0.3s ease-in-out;
 }
 
 nav.navbar.scrolled {
-  padding: 0px 0;
-  background-color: #121212;
+  padding: 10px 0;
+  background-color: #ffffff;
+  color: #121212;
 }
 
+nav.navbar.scrolled a,
+nav.navbar.scrolled .navbar-brand,
+nav.navbar.scrolled .navbar-link {
+  color: #121212 !important;
+}
+
+/************ Logo ************/
 nav.navbar a.navbar-brand {
   width: 9%;
+  font-weight: bold;
+  font-size: 24px;
 }
 
+/************ Enlaces de navegación ************/
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
-  color: #fff !important;
   letter-spacing: 0.8px;
   padding: 0 25px;
   font-size: 18px;
   opacity: 0.75;
+  
 }
 
-nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
-nav.navbar .navbar-nav a.nav-link.navbar-link.active {
+nav.navbar .navbar-nav .nav-link.navbar-link:hover,
+nav.navbar .navbar-nav .nav-link.navbar-link.active {
   opacity: 1;
 }
 
 span.navbar-text {
   display: flex;
   align-items: center;
+  
 }
 
 /************ Íconos sociales (opcional) ************/
@@ -92,6 +132,11 @@ span.navbar-text {
   position: relative;
   background-color: transparent;
   transition: 0.3s ease-in-out;
+}
+
+.navbar.scrolled .navbar-text button {
+  color: #121212;
+  border-color: #121212;
 }
 
 .navbar-text button span {
@@ -158,18 +203,29 @@ nav.navbar .navbar-toggler-icon:after {
   top: 8px;
 }
 
+nav.navbar.scrolled .navbar-toggler-icon,
+nav.navbar.scrolled .navbar-toggler-icon:after,
+nav.navbar.scrolled .navbar-toggler-icon:before {
+  background-color: #121212;
+  border-color: #121212;
+}
+
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
   transform: rotate(45deg);
-  background-color: #fff;
   height: 2px;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
   transform: translateY(8px) rotate(-45deg);
-  background-color: #fff;
   height: 2px;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-color: transparent;
+}
+
+
+nav.navbar,
+nav.navbar * {
+  font-family: 'Centra', sans-serif;
 }

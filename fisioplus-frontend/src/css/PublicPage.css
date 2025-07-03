@@ -1,54 +1,66 @@
 /************ Custom Font ************/
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Bold.ttf');
-	font-weight: 700;
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Bold.ttf');
+  font-weight: 700;
 }
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Medium.ttf');
-	font-weight: 500;
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Medium.ttf');
+  font-weight: 500;
 }
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Book.ttf');
-	font-weight: 400;
+  font-family: 'Centra';
+  src: url('../assets/font/CentraNo2-Book.ttf');
+  font-weight: 400;
 }
 
-
-
-/* ------------------------------
-   CSS
------------------------------- *//* src/css/PublicPage.css */
-/************ Public Page CSS ************/
+/************ Public Page Styles ************/
 .publicpage-background {
   background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
-  background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh; /* ← Esta línea es fundamental */
- background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 90vh;
+  font-family: 'Centra', sans-serif;
+  
+  
+}
+
+.public-page {
+  padding: 160px 0 100px 0;
+  display: flex;
+  align-items: center;
+    padding-bottom: 200px;
 
 }
 
+/* Imagen animada */
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  animation: float 3s ease-in-out infinite;
+}
 
-
-
+/* Título y descripción */
 .public-page .tagline {
   font-weight: 700;
   letter-spacing: 0.8px;
   padding: 8px 10px;
-  background: linear-gradient(
-    90.21deg,
-    rgba(170, 54, 124, 0.5) -5.91%,
-    rgba(74, 47, 189, 0.5) 111.58%
-  );
+  background: linear-gradient(90.21deg, rgba(170, 54, 124, 0.5) -5.91%, rgba(74, 47, 189, 0.5) 111.58%);
   border: 1px solid rgba(255, 255, 255, 0.5);
   font-size: 20px;
   margin-bottom: 16px;
   display: inline-block;
+  color: white;
 }
-
 
 .public-page h1 {
   font-size: 65px;
@@ -56,17 +68,18 @@
   letter-spacing: 0.8px;
   line-height: 1;
   margin-bottom: 20px;
-  display: block;
+  color: white;
 }
 
+.public-page .hero-description,
 .public-page p {
-  color: #b8b8b8;
+  color: #ffeded;
   font-size: 18px;
   letter-spacing: 0.8px;
   line-height: 1.5em;
-  width: 96%;
 }
 
+/* Botón CTA */
 .public-page button {
   color: #fff;
   font-weight: 700;
@@ -75,32 +88,92 @@
   letter-spacing: 0.8px;
   display: flex;
   align-items: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 18px 34px;
+  border-radius: 4px;
+  transition: 0.3s ease-in-out;
+}
+
+.public-page button:hover {
+  color: #121212;
+  background: #fff;
 }
 
 .public-page button svg {
-  font-size: 25px;
   margin-left: 10px;
   transition: 0.3s ease-in-out;
-  line-height: 1;
 }
 
 .public-page button:hover svg {
   margin-left: 25px;
 }
 
-.public-page img {
-  animation: float 3s ease-in-out infinite;
-  margin-top: 30px;
-  margin-left: px; /* 👉 Mueve hacia la derecha */
-    max-width: 70%;}
-
-@keyframes updown {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(20px); }
-  100% { transform: translateY(0px); }
-}
-
-
+/* Texto animado */
 .txt-rotate > .wrap {
   border-right: 0.08em solid #666;
+  animation: blink-caret 1s step-end infinite;
 }
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #666;
+  }
+}
+
+/* Flotación de imagen */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/************ Responsive ************/
+@media (max-width: 768px) {
+  .public-page {
+    padding: 100px 0 50px 0;
+  }
+
+  .public-page h1 {
+    font-size: 40px;
+  }
+
+  .public-page p,
+  .public-page .hero-description {
+    font-size: 16px;
+  }
+
+  .public-page button {
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+
+  .section-title {
+    font-size: 35px;
+  }
+
+  .quick-access {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .hero-image {
+    max-width: 100%;
+  }
+}
+
+/* Compatibilidad con Bootstrap */
+.align-items-center {
+  align-items: center;
+}
+
+

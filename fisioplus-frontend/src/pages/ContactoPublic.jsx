@@ -2,16 +2,31 @@
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import bannerbg from '../assets/img/banner-bg.png';
 
 const ContactoPublic = () => {
   return (
     <>
       <style>{`
+        .background-wrapper {
+          background-image: url('${bannerbg}');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          min-height: 100vh;
+          padding: 4rem 0;
+                                padding: 100px 1.5rem 0 1.5rem; /* 100px arriba, 0 abajo */
+
+        }
+
         .public-page-container {
           max-width: 900px;
-          margin: 4rem auto;
-          padding: 0 1.5rem;
+          margin: 0 auto;
+          padding: 2rem 1.5rem;
           font-family: 'Segoe UI', sans-serif;
+          background-color: rgba(255, 255, 255, 0.95); /* Fondo claro translúcido */
+          border-radius: 20px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
         }
 
         .hero-section {
@@ -92,26 +107,28 @@ const ContactoPublic = () => {
 
       <Navbar />
 
-      <div className="public-page-container">
-        <section className="hero-section">
-          <h1>Contáctanos</h1>
-          <p>Estamos aquí para resolver tus dudas y ayudarte a empezar tu tratamiento</p>
-        </section>
+      <div className="background-wrapper">
+        <div className="public-page-container">
+          <section className="hero-section">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para resolver tus dudas y ayudarte a empezar tu tratamiento</p>
+          </section>
 
-        <div className="contact-info">
-          <h3>Información de contacto</h3>
-          <p><strong>Teléfono:</strong> +51 999 123 456</p>
-          <p><strong>Email:</strong> contacto@fisioplus.pe</p>
-          <p><strong>Dirección:</strong> Av. Salud 123, Lima, Perú</p>
-          <p><strong>Horario:</strong> Lunes a Viernes, 8:00am – 6:00pm</p>
+          <div className="contact-info">
+            <h3>Información de contacto</h3>
+            <p><strong>Teléfono:</strong> +51 999 123 456</p>
+            <p><strong>Email:</strong> contacto@fisioplus.pe</p>
+            <p><strong>Dirección:</strong> Av. Salud 123, Lima, Perú</p>
+            <p><strong>Horario:</strong> Lunes a Viernes, 8:00am – 6:00pm</p>
+          </div>
+
+          <form className="contact-form">
+            <input type="text" placeholder="Nombre completo" required />
+            <input type="email" placeholder="Correo electrónico" required />
+            <textarea rows="5" placeholder="Escribe tu mensaje aquí..." required />
+            <button type="submit">Enviar mensaje</button>
+          </form>
         </div>
-
-        <form className="contact-form">
-          <input type="text" placeholder="Nombre completo" required />
-          <input type="email" placeholder="Correo electrónico" required />
-          <textarea rows="5" placeholder="Escribe tu mensaje aquí..." required />
-          <button type="submit">Enviar mensaje</button>
-        </form>
       </div>
 
       <Footer />
