@@ -1,11 +1,13 @@
 // src/pages/PerfilPage.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from '../api/axios';
 import Navbar from '../components/Navbar'; // ✅ Navbar reutilizable
 import '../css/PerfilPage.css'; // ✅ Estilo específico
 import Footer from '../components/Footer';
+import { AuthContext } from '../auth/AuthContext';
 
 const PerfilPage = () => {
+  const { user } = useContext(AuthContext);
   const [perfil, setPerfil] = useState(null);
   const [error, setError] = useState(null);
 
@@ -18,7 +20,11 @@ const PerfilPage = () => {
       return;
     }
 
-    axios.get('/auth/perfil')
+    axios.get('/auth/perfil', {
+      headers: {
+        Authorization: `Bearer ${user.accesstoken}`,
+      }
+    })
       .then(res => {
         console.log("✅ Perfil recibido:", res.data);
         setPerfil(res.data);
@@ -27,7 +33,7 @@ const PerfilPage = () => {
         console.error("❌ Error al obtener perfil:", err);
         setError("No se pudo cargar el perfil. Asegúrate de haber iniciado sesión.");
       });
-  }, []);
+  }, [user]);
 
   return (
     <>

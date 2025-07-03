@@ -84,7 +84,7 @@ const PublicPage = () => {
                       {`FisioPlusRafael `}
                       <span
                         className="txt-rotate"
-                        dataPeriod="1000"
+                        dataperiod="1000"
                         data-rotate='[ "Terapia", "Progreso" ]'
                       >
                         <span className="wrap">{text}</span>

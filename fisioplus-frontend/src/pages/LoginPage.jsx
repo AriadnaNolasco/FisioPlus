@@ -50,8 +50,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/login', form);
-      login({ ...res.data, token: res.data.token });
-      localStorage.setItem('token', res.data.token);
+      login({ ...res.data, token: res.data.accessToken });
+      localStorage.setItem('token', res.data.accessToken);
       navigate('/home');
     } catch (err) {
       console.error("Error al iniciar sesión:", err);
@@ -76,8 +76,8 @@ const LoginPage = () => {
       };
 
       const res = await axios.post('/auth/google', googleData);
-      login({ ...res.data, token: res.data.token });
-      localStorage.setItem('token', res.data.token);
+      login({ ...res.data, token: res.data.accessToken });
+      localStorage.setItem('token', res.data.accessToken);
       navigate('/home');
     } catch (err) {
       console.error('Error con Google Login:', err);
