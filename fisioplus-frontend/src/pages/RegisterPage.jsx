@@ -54,7 +54,7 @@ const RegisterPage = () => {
       const response = await axios.post('/auth/google', googleUser);
 
       localStorage.setItem('token', response.data.accessToken);
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('Error con Google Sign-In:', error);
       setError('Error al registrarse con Google');

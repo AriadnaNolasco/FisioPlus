@@ -1,67 +1,18 @@
-.citas-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.homepage0-background {
+  background-image: url('../assets/img/banner-bg.png');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
+    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
+
 }
 
-.citas-container h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  color: #2c3e50;
-}
 
-.cita-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
 
-.cita-form input {
-  padding: 0.8rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-}
-
-.cita-form button {
-  padding: 0.8rem;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cita-form button:hover {
-  background-color: #2980b9;
-}
-
-.citas-list {
-  list-style: none;
-  padding: 0;
-}
-
-.citas-list li {
-  background-color: #ecf0f1;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  color: #2c3e50;
-  font-size: 1rem;
-}
-
-.citas-list li span {
-  font-weight: bold;
-}
+/* ================================
+   CONTENEDOR PRINCIPAL DE CITAS
+================================ */
 .citas-container {
   max-width: 700px;
   margin: 2rem auto;
@@ -72,6 +23,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Título de sección */
 .citas-container h2 {
   text-align: center;
   font-size: 1.8rem;
@@ -79,6 +31,9 @@
   margin-bottom: 1.5rem;
 }
 
+/* ================================
+   FORMULARIO PARA NUEVA CITA
+================================ */
 .cita-form {
   display: flex;
   flex-direction: column;
@@ -86,6 +41,7 @@
   margin-bottom: 2rem;
 }
 
+/* Campos del formulario */
 .cita-form input {
   padding: 0.8rem;
   border: 1px solid #ccc;
@@ -93,6 +49,7 @@
   font-size: 1rem;
 }
 
+/* Botón de enviar */
 .cita-form button {
   padding: 0.8rem;
   background-color: #0ca8a8;
@@ -108,11 +65,15 @@
   background-color: #098b8b;
 }
 
+/* ================================
+   LISTA DE CITAS REGISTRADAS
+================================ */
 .citas-list {
   list-style: none;
   padding: 0;
 }
 
+/* Estilo para cada cita */
 .citas-list li {
   background-color: #ecf0f1;
   margin-bottom: 1rem;
@@ -123,12 +84,39 @@
   font-size: 1rem;
 }
 
+/* Detalle resaltado dentro de la cita */
 .citas-list li span {
   font-weight: bold;
   display: block;
   margin-bottom: 0.3rem;
 }
-/* Estilo para el icono de menú en pantallas pequeñas */
+
+/* ================================
+   HEADER (LOGO Y NAVEGACIÓN)
+================================ */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  width: 40px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2f45;
+  text-decoration: none;
+}
+
+/* ================================
+   RESPONSIVE PARA HEADER Y NAV
+================================ */
+
+/* Icono de menú hamburguesa */
 .menu-toggle {
   display: none;
   font-size: 1.5rem;
@@ -138,7 +126,7 @@
   cursor: pointer;
 }
 
-/* Contenedor de navegación en versión móvil */
+/* Ajustes responsivos */
 @media (max-width: 768px) {
   .homepage-header {
     flex-direction: column;
@@ -169,21 +157,5 @@
     text-align: left;
   }
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
-.logo-img {
-  width: 40px;
-  height: auto;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2f45;
-  text-decoration: none;
-}
 

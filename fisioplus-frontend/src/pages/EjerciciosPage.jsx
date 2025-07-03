@@ -1,15 +1,19 @@
+// src/pages/EjerciciosPage.jsx
+
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
+import Navbar from '../components/Navbar';
 
 import '../css/EjerciciosPage.css';
 import '../css/HomePage.css';
+import Footer from '../components/Footer';
 
 const EjerciciosPage = () => {
   const [ejercicios, setEjercicios] = useState([]);
   const [search, setSearch] = useState('');
   const { logout } = useContext(AuthContext);
 
+  // ✅ Cargar ejercicios simulados al iniciar
   useEffect(() => {
     setEjercicios([
       {
@@ -57,32 +61,22 @@ const EjerciciosPage = () => {
     ]);
   }, []);
 
+  // 🔎 Filtro de ejercicios
   const ejerciciosFiltrados = ejercicios.filter(ej =>
     ej.nombre.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="homepage-container">
-      <div className="page-wrapper">
-        <header className="homepage-header">
-          <div className="logo">
-            <Link to="/" className="logo-link">
-              <img src="/images/logo.png" alt="Logo" className="logo-img" />
-              <span className="logo-text">FisioPlus</span>
-            </Link>
-          </div>
-          <nav className="homepage-nav">
-            <Link to="/perfil">Perfil</Link>
-            <Link to="/citas">Citas</Link>
-            <Link to="/ejercicios">Ejercicios</Link>
-            <Link to="/progreso">Progreso</Link>
-            <button className="logout-button" onClick={logout}>Cerrar sesión</button>
-          </nav>
-        </header>
+    <>
+      {/* ✅ Navbar común */}
+      <Navbar />
 
+      {/* 🌄 Fondo y contenido principal */}
+      <div className="homepage2-background">
         <main className="ejercicios-container">
           <h2>Ejercicios Recomendados</h2>
 
+          {/* 🔍 Input de búsqueda */}
           <input
             type="text"
             placeholder="Buscar ejercicio..."
@@ -91,6 +85,7 @@ const EjerciciosPage = () => {
             className="search-input"
           />
 
+          {/* 🧘‍♂️ Tarjetas de ejercicios */}
           <div className="ejercicios-grid">
             {ejerciciosFiltrados.map(ej => (
               <div key={ej.id} className="ejercicio-card">
@@ -111,11 +106,11 @@ const EjerciciosPage = () => {
           </div>
         </main>
 
-        <footer className="homepage-footer">
-          &copy; {new Date().getFullYear()} FisioPlus. Todos los derechos reservados.
-        </footer>
+        {/* 📌 Pie de página */}
+  <Footer />
+
       </div>
-    </div>
+    </>
   );
 };
 

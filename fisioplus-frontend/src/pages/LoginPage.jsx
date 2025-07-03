@@ -52,7 +52,7 @@ const LoginPage = () => {
       const res = await axios.post('/auth/login', form);
       login({ ...res.data, token: res.data.token });
       localStorage.setItem('token', res.data.token);
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       console.error("Error al iniciar sesión:", err);
       setError("Credenciales inválidas");
@@ -78,7 +78,7 @@ const LoginPage = () => {
       const res = await axios.post('/auth/google', googleData);
       login({ ...res.data, token: res.data.token });
       localStorage.setItem('token', res.data.token);
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       console.error('Error con Google Login:', err);
       setError('Error al iniciar sesión con Google');

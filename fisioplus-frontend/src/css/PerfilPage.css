@@ -1,0 +1,67 @@
+.homepage3-background {
+  background-image: url('../assets/img/banner-bg.png');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
+    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
+
+}
+
+/* ---------------------------
+   Estilos para PerfilPage
+---------------------------- */
+
+.perfil-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 120px auto 50px auto; /* espacio para el navbar */
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.perfil-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #1f2f45;
+  margin-bottom: 1.5rem;
+}
+
+.perfil-info {
+  background: #f9f9f9;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.perfil-info p {
+  margin-bottom: 0.9rem;
+  line-height: 1.5;
+}
+
+.perfil-info strong {
+  color: #00796b;
+  font-weight: bold;
+}
+
+/* Mensajes de estado */
+.perfil-error {
+  color: #d32f2f;
+  background-color: #ffe0e0;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.perfil-loading {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 2rem;
+}
