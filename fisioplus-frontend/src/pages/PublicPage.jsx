@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.png";
+import bannerBg from "../assets/img/banner-bg.png";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
 import Navbar from "../components/Navbar";
-import Footer from '../components/Footer';
+import Footer from "../components/Footer";
 
-import '../css/PublicPage.css';
+import "../css/PublicPage.css";
 
 const PublicPage = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const toRotate = ["Terapia", "Progreso"];
   const period = 2000;
@@ -36,7 +37,7 @@ const PublicPage = () => {
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
       setDelta(period);
-    } else if (isDeleting && updatedText === '') {
+    } else if (isDeleting && updatedText === "") {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
       setDelta(500);
@@ -46,93 +47,43 @@ const PublicPage = () => {
   return (
     <>
       <Navbar />
-      <div className="publicpage-background">
-        <section className="public-page banner-section" id="home">
-          <Container>
-            <Row className="align-items-center">
-              <Col xs={12} md={6} xl={7}>
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                      <span className="tagline">Centro especializado</span>
-                      <h1>
-                        FisioPlusRafael{" "}
-                        <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Terapia", "Progreso" ]'>
-                          <span className="wrap">{text}</span>
-                        </span>
-                      </h1>
-                      <p className="hero-description">
-                        Bienvenido a tu espacio de rehabilitación donde podrás hacer ejercicios
-                        diarios, consultar tu historia médica, acceder a información confiable,
-                        comunicarte con tu fisioterapeuta por chat y seguir tu progreso para mejorar tu
-                        movilidad y bienestar.
-                      </p>
-                      <button type="button" onClick={() => console.log("connect")}>
-                        ¡Comencemos con tu rutina de ejercicios! <ArrowRightCircle size={25} />
-                      </button>
-                    </div>
-                  )}
-                </TrackVisibility>
-              </Col>
 
-<<<<<<< HEAD
-              <Col xs={12} md={6} xl={5}>
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                      <img
-                        className="hero-image"
-                        src={headerImg}
-                        alt="Ejercicio de fisioterapia"
-                      />
-                    </div>
-                  )}
-                </TrackVisibility>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-        <Footer />
-      </div>
-    </>
-=======
       <section
         className="public-page"
         id="home"
         style={{
-          backgroundImage: `url(${bannerBg})`, // ✅ Se aplica correctamente aquí
+          backgroundImage: `url(${bannerBg})`,
           backgroundSize: "cover",
           backgroundPosition: "top center",
           backgroundRepeat: "no-repeat",
-          minHeight: "100vh", // ✅ Forzamos altura para que el fondo se vea
+          minHeight: "100vh",
           padding: "260px 0 100px 0",
         }}
       >
-        
         <Container>
           <Row className="align-items-center">
             <Col xs={12} md={6} xl={7}>
               <TrackVisibility>
                 {({ isVisible }) => (
                   <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                    <span className="tagline">FisioPlusRafael</span>
+                    <span className="tagline">Centro especializado</span>
                     <h1>
-                      {`FisioPlusRafael `}
+                      FisioPlusRafael{" "}
                       <span
                         className="txt-rotate"
-                        dataperiod="1000"
+                        data-period="1000"
                         data-rotate='[ "Terapia", "Progreso" ]'
                       >
                         <span className="wrap">{text}</span>
                       </span>
                     </h1>
-                    <p style={{ color: "white" }}>
+                    <p className="hero-description">
                       Bienvenido a tu espacio de rehabilitación donde podrás hacer ejercicios
                       diarios, consultar tu historia médica, acceder a información confiable,
                       comunicarte con tu fisioterapeuta por chat y seguir tu progreso para mejorar tu
                       movilidad y bienestar.
                     </p>
-                    <button onClick={() => console.log("connect")}>
+                    <button type="button" onClick={() => console.log("connect")}>
                       ¡Comencemos con tu rutina de ejercicios! <ArrowRightCircle size={25} />
                     </button>
                   </div>
@@ -145,6 +96,7 @@ const PublicPage = () => {
                 {({ isVisible }) => (
                   <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
                     <img
+                      className="hero-image"
                       src={headerImg}
                       alt="Ejercicio de fisioterapia"
                       style={{ marginTop: "-100px", maxWidth: "100%" }}
@@ -156,8 +108,9 @@ const PublicPage = () => {
           </Row>
         </Container>
       </section>
-    </div>
->>>>>>> 1c96bab4055ea0e0c929372b1698d01e6f27b1bc
+
+      <Footer />
+    </>
   );
 };
 
