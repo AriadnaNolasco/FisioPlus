@@ -33,11 +33,11 @@ function App() {
           <Route path="/" element={<PublicPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-<Route path="/clinica" element={<ClinicaPublic />} />
-<Route path="/tratamientos" element={<TratamientosPublic />} />
-<Route path="/especialidades" element={<EspecialidadesPublic />} />
-<Route path="/terapeutas" element={<TerapeutasPublic />} />
-<Route path="/contacto" element={<ContactoPublic />} />
+          <Route path="/clinica" element={<ClinicaPublic />} />
+          <Route path="/tratamientos" element={<TratamientosPublic />} />
+          <Route path="/especialidades" element={<EspecialidadesPublic />} />
+          <Route path="/terapeutas" element={<TerapeutasPublic />} />
+          <Route path="/contacto" element={<ContactoPublic />} />
 
 
           {/* 🔐 Rutas privadas */}
