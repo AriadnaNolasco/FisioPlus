@@ -4,33 +4,37 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import bannerbg from '../assets/img/banner-bg.png';
 
-
-
-
 const ClinicaPublic = () => {
   return (
-    <>
+    <div
+      className="background-wrapper"
+      style={{
+        backgroundImage: `url(${bannerbg})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        padding: '100px 1.5rem 0 1.5rem',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+      }}
+    >
       <style>{`
         .public-page-container {
           max-width: 1000px;
           margin: 4rem auto;
-          padding: 2rem 1.5rem;
+          padding: 0rem 1.5rem;
           font-family: 'Segoe UI', sans-serif;
-          background: linear-gradient(to bottom, #f4fdfd, #ffffff);
           border-radius: 16px;
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
-          
-
         }
 
         .hero-section {
           text-align: center;
           padding: 4rem 0;
-          margin-bottom: 4rem;
-          background: linear-gradient(135deg, #00bfa5 0%,rgb(32, 173, 183) 100%);
+          margin: 2rem 0 4rem 0;
+          background: linear-gradient(135deg, #00bfa5 0%, rgb(32, 173, 183) 100%);
           border-radius: 24px;
           color: white;
-          margin-top: 2rem;
           position: relative;
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0, 191, 165, 0.2);
@@ -124,7 +128,7 @@ const ClinicaPublic = () => {
           content: '';
           width: 8px;
           height: 8px;
-          background: linear-gradient(45deg, #00bfa5,rgb(71, 150, 134));
+          background: linear-gradient(45deg, #00bfa5, rgb(71, 150, 134));
           border-radius: 50%;
           animation: pulse 2s infinite;
         }
@@ -134,26 +138,22 @@ const ClinicaPublic = () => {
           50% { transform: scale(1.2); opacity: 0.7; }
         }
 
-        .info-section p {
-          color: #4a5568;
-          font-size: 1.1rem;
-          line-height: 1.7;
-          margin-bottom: 1rem;
-        }
-
+        .info-section p,
         .info-section ul {
           color: #4a5568;
           font-size: 1.1rem;
-          line-height: 1.8;
-          padding-left: 0;
+          line-height: 1.7;
+        }
+
+        .info-section ul {
           list-style: none;
+          padding-left: 0;
         }
 
         .info-section li {
           position: relative;
           padding-left: 2rem;
           margin-bottom: 0.8rem;
-          transition: color 0.3s ease;
         }
 
         .info-section li::before {
@@ -165,32 +165,12 @@ const ClinicaPublic = () => {
           font-size: 1.2rem;
         }
 
-        .info-section li:hover {
-          color: #2d3748;
-        }
-
         .location-section {
           grid-column: 1 / -1;
-          background: linear-gradient(135deg, #667eea 0%,rgb(0, 255, 255) 100%);
+          background: linear-gradient(135deg, #667eea 0%, rgb(0, 255, 255) 100%);
           color: white;
           position: relative;
-        }
-
-        .location-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 100%;
-          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-          opacity: 0.3;
-        }
-
-        .location-section h2,
-        .location-section p {
-          position: relative;
-          z-index: 1;
+          padding: 2rem;
         }
 
         .stats-section {
@@ -206,36 +186,27 @@ const ClinicaPublic = () => {
           border-radius: 16px;
           text-align: center;
           box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-          transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-          transform: translateY(-4px);
         }
 
         .stat-number {
           font-size: 2.5rem;
           font-weight: 800;
           color: #00bfa5;
-          margin-bottom: 0.5rem;
         }
 
         .stat-label {
           color: #4a5568;
           font-size: 0.9rem;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
         }
 
         @media screen and (max-width: 768px) {
           .content-wrapper {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
           }
 
           .hero-section {
             padding: 3rem 1rem;
-            margin-top: 1rem;
           }
 
           .hero-section h1 {
@@ -244,14 +215,6 @@ const ClinicaPublic = () => {
 
           .hero-section p {
             font-size: 1.1rem;
-          }
-
-          .info-section {
-            padding: 2rem;
-          }
-
-          .info-section h2 {
-            font-size: 1.5rem;
           }
 
           .stats-section {
@@ -264,26 +227,10 @@ const ClinicaPublic = () => {
             font-size: 2rem;
           }
 
-          .info-section {
-            padding: 1.5rem;
-          }
-
           .stats-section {
             grid-template-columns: 1fr;
           }
         }
-          
-
-        .public-page-container {
-  background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
-    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
-
-}
-        
       `}</style>
 
       <Navbar />
@@ -317,17 +264,19 @@ const ClinicaPublic = () => {
           <section className="info-section">
             <h2>¿Quiénes somos?</h2>
             <p>
-              En <strong>FisioPlus</strong> somos una clínica especializada en fisioterapia y rehabilitación integral.
-              Nos dedicamos a mejorar la calidad de vida de nuestros pacientes mediante tratamientos personalizados,
-              atención empática y tecnología de vanguardia.
+              En <strong>FisioPlus</strong> somos una clínica especializada en fisioterapia y
+              rehabilitación integral. Nos dedicamos a mejorar la calidad de vida de nuestros
+              pacientes mediante tratamientos personalizados, atención empática y tecnología de
+              vanguardia.
             </p>
           </section>
 
           <section className="info-section">
             <h2>Nuestra misión</h2>
             <p>
-              Brindar servicios de fisioterapia de alta calidad enfocados en la recuperación funcional, la prevención
-              del dolor crónico y la promoción de hábitos saludables para una vida plena.
+              Brindar servicios de fisioterapia de alta calidad enfocados en la recuperación
+              funcional, la prevención del dolor crónico y la promoción de hábitos saludables para
+              una vida plena.
             </p>
           </section>
 
@@ -344,16 +293,17 @@ const ClinicaPublic = () => {
           <section className="info-section location-section">
             <h2>¿Dónde estamos ubicados?</h2>
             <p>
-              Nuestra clínica se encuentra en el corazón de la ciudad, con fácil acceso y ambientes diseñados
-              para tu comodidad. Contamos con instalaciones modernas, estacionamiento disponible y horarios
-              flexibles para adaptarnos a tu rutina. ¡Te esperamos para ayudarte a sentirte mejor cada día!
+              Nuestra clínica se encuentra en el corazón de la ciudad, con fácil acceso y ambientes
+              diseñados para tu comodidad. Contamos con instalaciones modernas, estacionamiento
+              disponible y horarios flexibles para adaptarnos a tu rutina. ¡Te esperamos para
+              ayudarte a sentirte mejor cada día!
             </p>
           </section>
         </div>
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
