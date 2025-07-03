@@ -4,6 +4,7 @@ import { AuthContext } from '../auth/AuthContext';
 import Navbar from '../components/Navbar';
 import '../css/HomePage.css';
 import Footer from '../components/Footer';
+import Chatbot from '../components/Chatbot'; // Importar el componente Chatbot
 
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
@@ -56,14 +57,18 @@ const HomePage = () => {
                   <Link to="/progreso">Progreso</Link>
                 </div>
               </section>
+
+              {/* Aquí agregamos el Chatbot */}
+              <section className="chatbot-section">
+                <h3>¡Habla con nuestro Asistente Virtual!</h3>
+                <Chatbot /> {/* Componente del Chatbot */}
+              </section>
             </main>
 
             {/* Pie de página */}
-
           </div>
         </div>
-          <Footer />
-
+        <Footer />
       </div>
     </>
   );

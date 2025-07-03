@@ -1,3 +1,4 @@
+/* Contenedor principal de la página */
 .progreso-container {
   padding: 2rem;
   max-width: 900px;
@@ -155,13 +156,268 @@ input[type="number"] {
   }
 }
 
-
 .homepage1-background {
   background-image: url('../assets/img/banner-bg.png');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
-    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
+  background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
+}
 
+/* Estilos para el botón de "Mostrar Historial" */
+.mostrar-historial-btn {
+  padding: 6px 12px; /* Tamaño reducido */
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  background-color: #00bfa5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto;
+  display: inline-block;
+  text-align: center;
+  float: right; /* Mueve el botón a la derecha */
+}
+
+.mostrar-historial-btn:hover {
+  background-color: #008c74;
+}
+
+/* Ajustes al diseño del contenedor y los filtros */
+.progreso-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.opciones {
+  margin-bottom: 1.5rem;
+}
+
+.opciones h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+select {
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Ajustes al botón de "Registrar Progreso" */
+.submit-progreso {
+  background-color: #009ca8;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-progreso:hover {
+  background-color: #007f89;
+}
+
+/* Estilos generales */
+.progreso-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.opciones {
+  margin-bottom: 1.5rem;
+}
+
+.opciones h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Estilos para el calendario */
+.calendar-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilos para los selects de los filtros */
+select {
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilos del botón de "Registrar Progreso" */
+.submit-progreso {
+  background-color: #009ca8;
+  color: white;
+  padding: 9px 10px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20%;
+  display: inline-block;
+}
+
+.submit-progreso:hover {
+  background-color: #007f89;
+}
+
+/* Estilos para la lista de progresos */
+.lista-progresos {
+  margin-top: 2rem;
+}
+
+.lista-progresos h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.progreso-item {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.barra-externa {
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+}
+
+.barra-interna {
+  background: #28a745;
+  height: 100%;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  transition: width 0.4s ease-in-out;
+}
+
+/* Estilos para el gráfico */
+.grafico-progreso {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #eee;
+}
+/* Estilos para el botón de "Mostrar Historial" */
+.mostrar-historial-btn {
+  padding: 6px 12px; /* Tamaño reducido */
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  background-color: #00bfa5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  width: auto;
+  display: inline-block;
+  float: right; /* Asegura que el botón esté en la esquina derecha */
+  margin-top: 0.5rem; /* Añadido margen para separación visual */
+}
+
+.mostrar-historial-btn:hover {
+  background-color: #008c74;
+}
+
+/* Si el contenedor tiene espacio alrededor, añadir un margen adicional para asegurar que el botón se posicione bien */
+.progreso-container .mostrar-historial-btn {
+  margin-left: auto;
+}
+/* Estilo para los filtros y sus etiquetas */
+.opciones {
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en una columna */
+  gap: 12px;
+  justify-content: flex-start; /* Alinea todos los elementos hacia la izquierda */
+  margin-bottom: 1rem;
+}
+
+.opciones h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #16243b;
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilo para los selects, asegurando que estén alineados a la izquierda */
+.opciones select {
+  padding: 10px;
+  width: 100%; /* Asegura que los selects tengan el 100% del ancho del contenedor */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: left; /* Alinea el texto dentro del select a la izquierda */
+}
+
+/* Botón de "Mostrar Historial" */
+.mostrar-historial-btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background-color: #00bfa5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  width: auto;
+  display: inline-block;
+  float: right; /* Asegura que el botón esté a la derecha */
+  margin-top: 0.5rem;
+}
+
+.mostrar-historial-btn:hover {
+  background-color: #008c74;
+}
+
+/* Contenedor para el calendario */
+.calendar-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilo de los filtros en móvil para que se alineen bien */
+@media screen and (max-width: 600px) {
+  .opciones {
+    align-items: flex-start; /* Alinea los filtros a la izquierda en pantallas pequeñas */
+  }
+
+  .submit-progreso {
+    width: 100%;
+  }
+
+  .calendar-container {
+    width: 100%;
+  }
 }
