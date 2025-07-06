@@ -9,7 +9,7 @@ import useAuthStore from '../store/authStore';
 export default function LoginPage() {
     const [form, setForm] = useState({ username: '', password: '' });
     const navigate = useNavigate();
-    const {setToken, setUser} = useAuthStore();
+    const { setAccessToken, setRefreshToken, setUser } = useAuthStore();
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -17,12 +17,16 @@ export default function LoginPage() {
         e.preventDefault();
         try {
             const res = await login(form);
-            const access = res.data.access;
-            setToken(access);
+            const { access, refresh } = res.data;
+
+            setAccessToken(access);
+            setRefreshToken(refresh);
+
             const userRes = await getCurrentUser(access);
             setUser(userRes.data);
-            navigate('/dashboard'); // Página protegida (la crearemos después)
-            console.log("Rederigiendo a Dashboard");
+
+            navigate('/dashboard');
+            console.log("Redirigiendo a Dashboard");
         } catch (err) {
             console.error("Error al loguear:", err);
             alert('Credenciales incorrectas');

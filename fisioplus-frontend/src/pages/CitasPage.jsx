@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
-import axios from '../api/axios';
+import axiosSpring from '../api/axios';
+import { obtenerTerapeutas } from '../api/terapeutaService';
 import { AuthContext } from '../auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,22 +12,19 @@ import '../css/CitasPage.css';
 const CitasPage = () => {
   const { user } = useContext(AuthContext);
   const [citas, setCitas] = useState([]);
-  const [page, setPage] = useState(0);
+  const [terapeutas, setTerapeutas] = useState([]);
+  const [horarios, setHorarios] = useState([]);
   const [horariosOcupados, setHorariosOcupados] = useState([]);
+  const [page, setPage] = useState(0);
 
   const [nuevaCita, setNuevaCita] = useState({
     motivo: '',
     fecha: '',
     hora: '',
-    profesional: ''
+    terapeutaId: ''
   });
 
   const [error, setError] = useState('');
-
-  const profesionales = [
-    'Rafael Ulises Huamanyauri Solis',
-    'Roxana Pilar Dávila Nolasco'
-  ];
 
   const motivosFrecuentes = [
     'Dolor lumbar',
@@ -39,14 +37,43 @@ const CitasPage = () => {
     'Otro'
   ];
 
-  const horariosPorTurno = {
-    mañana: ['09:00', '10:00', '11:00', '12:00'],
-    tarde: ['13:00', '14:00', '15:00', '16:00', '17:00']
-  };
+  // 🔹 1. Obtener lista de terapeutas desde Django
+  useEffect(() => {
+    obtenerTerapeutas()
+      .then(res => {
+        console.log('✅ Terapeutas recibidos:', res); // 👈 Agrega este log
+        setTerapeutas(res);
+      })
+      .catch(err => console.error('Error al obtener terapeutas', err));
+  }, []);
 
+  // 🔹 2. Cuando se seleccione terapeuta y fecha, obtener horarios desde Django
+  useEffect(() => {
+    if (nuevaCita.terapeutaId && nuevaCita.fecha) {
+      const diaSemana = new Date(nuevaCita.fecha)
+        .toLocaleDateString('en-US', { weekday: 'long' })
+        .toUpperCase();
+
+      fetch(`http://localhost:8000/api/horarios/?terapeuta=${nuevaCita.terapeutaId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token_django')}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          const horariosDelDia = data.filter(h => h.dia_semana === diaSemana);
+          setHorarios(horariosDelDia);
+        })
+        .catch(err => console.error('Error al obtener horarios', err));
+    } else {
+      setHorarios([]);
+    }
+  }, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+
+  // 🔹 3. Obtener citas actuales del usuario desde Spring
   const fetchCitas = () => {
     if (!user?.id) return;
-    axios.get(`/citas/paciente/${user.id}?page=${page}&size=5`)
+    axiosSpring.get(`/citas/paciente/${user.id}?page=${page}&size=5`)
       .then(res => {
         setCitas(res.data.content);
         const ocupados = res.data.content
@@ -61,11 +88,11 @@ const CitasPage = () => {
     fetchCitas();
   }, [user, page]);
 
+  // 🔹 Crear cita en Spring
   const crearCita = (e) => {
     e.preventDefault();
     setError('');
 
-    // Convertir la fecha y hora seleccionadas a un objeto Date
     const [anio, mes, dia] = nuevaCita.fecha.split('-').map(Number);
     const [hora, minuto] = nuevaCita.hora.split(':').map(Number);
     const fechaSeleccionada = new Date(anio, mes - 1, dia, hora, minuto);
@@ -86,17 +113,16 @@ const CitasPage = () => {
       return;
     }
 
-    // Convertir la fecha y hora a ISO string para enviar al backend
-    const fechaHoraISO = fechaSeleccionada.toISOString().slice(0, 19); // Elimina los segundos y milisegundos
+    const fechaHoraISO = fechaSeleccionada.toISOString().slice(0, 19);
 
     const payload = {
       pacienteId: user?.id,
-      fechaHora: fechaHoraISO, // Enviamos la fecha en formato ISO
+      terapeutaId: nuevaCita.terapeutaId,
       motivo: nuevaCita.motivo,
-      profesional: nuevaCita.profesional
+      fechaHora: fechaHoraISO
     };
 
-    axios.post('/citas', payload)
+    axiosSpring.post('/citas', payload)
       .then(() => {
         toast.success('✅ ¡Cita agendada con éxito!');
         setNuevaCita({ motivo: '', fecha: '', hora: '', profesional: '' });
@@ -112,7 +138,7 @@ const CitasPage = () => {
   };
 
   const eliminarCita = (id) => {
-    axios.delete(`/citas/${id}`)
+    axiosSpring.delete(`/citas/${id}`)
       .then(() => {
         toast.success('Cita eliminada de forma permanente.');
         fetchCitas();
@@ -136,6 +162,7 @@ const CitasPage = () => {
           <p>Da el primer paso hacia tu bienestar. Elige un profesional y un horario.</p>
 
           <form onSubmit={crearCita} className="form-cita">
+            {/* Motivo */}
             <select
               value={nuevaCita.motivo}
               onChange={e => setNuevaCita({ ...nuevaCita, motivo: e.target.value })}
@@ -147,47 +174,75 @@ const CitasPage = () => {
               ))}
             </select>
 
+            {/* Terapeuta */}
+            <select
+              value={nuevaCita.terapeutaId}
+              onChange={e => setNuevaCita({ ...nuevaCita, terapeutaId: e.target.value })}
+              required
+            >
+              <option value="">Selecciona un profesional</option>
+              {terapeutas.map(t => (
+                <option key={t.id} value={t.id}>{t.nombre}</option>
+              ))}
+            </select>
+
+            {/* Fecha */}
             <input
               type="date"
               value={nuevaCita.fecha}
               onChange={e => setNuevaCita({ ...nuevaCita, fecha: e.target.value })}
               required
+              disabled={!nuevaCita.terapeutaId} // 🔒 Desactivar fecha si no hay terapeuta
             />
 
+            {/* Horarios */}
             <div className="horarios-turnos">
-              {Object.entries(horariosPorTurno).map(([turno, horas]) => (
-                <div key={turno}>
-                  <strong>{`Turno ${turno[0].toUpperCase() + turno.slice(1)}`}</strong>
-                  <div className="bloques-horas">
-                    {horas.map(h => (
-                      <button
-                        type="button"
-                        key={h}
-                        className={`bloque-hora ${nuevaCita.hora === h ? 'seleccionado' : ''}`}
-                        onClick={() => setNuevaCita({ ...nuevaCita, hora: h })}
-                      >
-                        {h}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+              {horarios.length === 0 ? (
+                <p style={{ marginTop: '1rem' }}>Selecciona un profesional y fecha para ver los horarios disponibles.</p>
+              ) : (
+                horarios.map(horario => {
+                  const horaInicio = horario.hora_inicio.slice(0, 5);
+                  const horaFin = horario.hora_fin.slice(0, 5);
 
-            <select
-              value={nuevaCita.profesional}
-              onChange={e => setNuevaCita({ ...nuevaCita, profesional: e.target.value })}
-              required
-            >
-              <option value="">Selecciona un profesional</option>
-              {profesionales.map(p => (
-                <option key={p} value={p}>{p}</option>
-              ))}
-            </select>
+                  const opciones = [];
+                  let [h, m] = horaInicio.split(':').map(Number);
+                  const [endH, endM] = horaFin.split(':').map(Number);
+
+                  while (h < endH || (h === endH && m < endM)) {
+                    const hora = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+                    opciones.push(hora);
+                    m += 60;
+                    if (m >= 60) {
+                      h += 1;
+                      m = 0;
+                    }
+                  }
+
+                  return (
+                    <div key={horario.id}>
+                      <strong>Turno: {horario.turno}</strong>
+                      <div className="bloques-horas">
+                        {opciones.map(hora => (
+                          <button
+                            type="button"
+                            key={hora}
+                            className={`bloque-hora ${nuevaCita.hora === hora ? 'seleccionado' : ''}`}
+                            onClick={() => setNuevaCita({ ...nuevaCita, hora })}
+                          >
+                            {hora}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
 
             <button type="submit" className="btn-confirmar">Confirmar Cita</button>
             {error && <p className="error">{error}</p>}
           </form>
+
         </div>
 
         <div className="mis-citas">

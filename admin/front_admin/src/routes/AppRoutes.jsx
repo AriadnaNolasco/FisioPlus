@@ -6,8 +6,8 @@ import useAuthStore from '../store/authStore';
 
 
 function PrivateRoute({ children }) {
-    const token = useAuthStore();
-    return token ? children : <Navigate to="/login" />;
+  const { token } = useAuthStore(); // ✅ extrae solo el token desde Zustand
+  return token ? children : <Navigate to="/login" />;
 }
 
 export default function AppRoutes() {
@@ -18,11 +18,11 @@ export default function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={
-            <PrivateRoute>
-                <Dashboard />
-            </PrivateRoute>
-            } />
-            {/* Aquí puedes agregar más rutas protegidas */}
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        } />
+        {/* Aquí puedes agregar más rutas protegidas */}
       </Routes>
     </BrowserRouter>
   );

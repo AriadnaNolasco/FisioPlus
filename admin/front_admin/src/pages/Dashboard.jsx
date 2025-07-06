@@ -1,16 +1,24 @@
 // src/pages/Dashboard.jsx
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/styles/dashboard.css'; // Lo crearemos
+import '../assets/styles/dashboard.css';
 import useAuthStore from '../store/authStore';
 
 export default function Dashboard() {
-  const { user, logout} = useAuthStore(); // Asegúrate de importar useAuthStore desde tu store
+  const { user, logout, accessToken } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
+
+  useEffect(() => {
+    if (!accessToken || !user) {
+      // Si no hay token o usuario cargado, redirige al login
+      navigate('/login');
+    }
+  }, [accessToken, user, navigate]);
 
   return (
     <div className="dashboard-container">
