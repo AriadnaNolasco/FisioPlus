@@ -23,5 +23,8 @@ public class CitaDTO {
     @NotBlank
     private String motivo;
 
-    private EstadoCita estado; // puede ser nulo, asumimos RESERVADA como default
+    @NotBlank
+    private String profesional;
+
+    private EstadoCita estado;
 }

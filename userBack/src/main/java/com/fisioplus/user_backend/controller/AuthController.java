@@ -1,4 +1,3 @@
-// --- AuthController.java ---
 package com.fisioplus.user_backend.controller;
 
 import com.fisioplus.user_backend.dto.AuthResponseDTO;
@@ -100,5 +99,23 @@ public class AuthController {
         return authUserService.obtenerPerfilUsuario(currentUsername)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Nuevo método PUT para editar el perfil
+    @PutMapping("/editarPerfil")
+    public ResponseEntity<?> editarPerfil(@RequestBody UsuarioDTO usuarioDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal().toString())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String currentUsername = authentication.getName();
+        try {
+            AuthUser updatedUser = authUserService.actualizarPerfil(currentUsername, usuarioDTO);
+            return ResponseEntity.ok(updatedUser);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body("Error al actualizar el perfil: " + ex.getMessage());
+        }
     }
 }
