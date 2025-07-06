@@ -57,18 +57,15 @@ const HomePage = () => {
                   <Link to="/progreso">Progreso</Link>
                 </div>
               </section>
-
-              {/* Aquí agregamos el Chatbot */}
-              <section className="chatbot-section">
-                <h3>¡Habla con nuestro Asistente Virtual!</h3>
-                <Chatbot /> {/* Componente del Chatbot */}
-              </section>
             </main>
 
-            {/* Pie de página */}
+            {/* Componente Chatbot */}
+            <Chatbot />  {/* Asegúrate de agregar este componente aquí si quieres mostrarlo */}
+
           </div>
+          {/* Pie de página */}
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );

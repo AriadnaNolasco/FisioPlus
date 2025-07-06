@@ -159,3 +159,47 @@
 }
 
 
+/* Botones de editar y cancelar */
+.cita-item button {
+  background-color: #f0f0f0;
+  color: #00796b;
+  border: 1px solid #00796b;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cita-item button:hover {
+  background-color: #00796b;
+  color: white;
+}
+
+.cita-item button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+/* Botones de editar y cancelar */
+.cita-item button {
+  background-color: #f0f0f0;
+  color: #00796b;
+  border: 1px solid #00796b;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cita-item button:hover {
+  background-color: #00796b;
+  color: white;
+}
+
+.cita-item button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}

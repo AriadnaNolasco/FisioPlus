@@ -8,12 +8,9 @@ import CitasPage from './pages/CitasPage';
 import EjerciciosPage from './pages/EjerciciosPage';
 import ProgresoPage from './pages/ProgresoPage';
 import PerfilPage from './pages/PerfilPage';
-
 import PublicPage from './pages/PublicPage'; // ✅ Página PÚBLICA para visitantes
-
 import PrivateRoute from './routes/PrivateRoute';
-
-
+import Chatbot from './components/Chatbot';
 
 
 

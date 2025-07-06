@@ -273,3 +273,81 @@ button {
 button:hover {
   background-color: #009c8c;
 }
+/* Personalización del calendario */
+.react-calendar {
+  background-color: #ffffff;  /* Fondo blanco para el calendario */
+  border-radius: 10px;         /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra sutil */
+}
+
+/* Estilo de las celdas del calendario */
+.react-calendar__tile {
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.react-calendar__tile:hover {
+  background-color: #00bfa5;  /* Color cuando pasas el ratón sobre una celda */
+  color: white;               /* Texto blanco cuando está en hover */
+}
+
+.react-calendar__tile--active {
+  background-color: #00796b;  /* Color para el día seleccionado */
+  color: white;
+}
+
+.react-calendar__month-view__days__day {
+  color: #333;  /* Color para los días de la semana */
+}
+
+/* Estilo de los días inactivos (del mes anterior o posterior) */
+.react-calendar__tile--off {
+  color: #b0b0b0;
+}
+
+/* Resaltar los fines de semana */
+.react-calendar__tile--weekend {
+  background-color: #f0f0f0;
+  color: #d32f2f;  /* Color rojo para los fines de semana */
+}
+
+/* Color del encabezado (nombre de los días de la semana) */
+.react-calendar__month-view__weekdays__weekday {
+  color: #16243b; /* Color para los días de la semana (lunes, martes, etc.) */
+  font-weight: bold;
+}
+
+/* Estilo para el contenedor del checkbox (alineación y espaciado) */
+.opciones input[type="checkbox"] {
+  margin: 0;
+}
+/* Navegación */
+.homepage-nav {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff; /* opcional si quieres un fondo blanco */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* una ligera sombra para separación */
+  margin-bottom: 1.5rem; /* ← separa visualmente el navbar del contenido */
+  border-radius: 0 0 12px 12px; /* borde inferior redondeado opcional */
+}
+
+.homepage-nav a {
+  text-decoration: none;
+  color: #099;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.logout-button {
+  background-color: hsl(340, 82%, 52%);
+  border: none;
+  color: white;
+  padding: 0.35rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
