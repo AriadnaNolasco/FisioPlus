@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // ✅ Importar useNavigate
 import headerImg from "../assets/img/header-img.png";
 import bannerBg from "../assets/img/banner-bg.png";
 import { ArrowRightCircle } from "react-bootstrap-icons";
@@ -18,6 +19,8 @@ const PublicPage = () => {
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const toRotate = ["Terapia", "Progreso"];
   const period = 2000;
+
+  const navigate = useNavigate(); // ✅ Inicializar navegación
 
   useEffect(() => {
     const ticker = setInterval(() => tick(), delta);
@@ -71,7 +74,7 @@ const PublicPage = () => {
                       FisioPlusRafael{" "}
                       <span
                         className="txt-rotate"
-                        dataperiod="1000"
+                        data-period="1000" // ✅ corregido
                         data-rotate='[ "Terapia", "Progreso" ]'
                       >
                         <span className="wrap">{text}</span>
@@ -83,7 +86,7 @@ const PublicPage = () => {
                       comunicarte con tu fisioterapeuta por chat y seguir tu progreso para mejorar tu
                       movilidad y bienestar.
                     </p>
-                    <button type="button" onClick={() => console.log("connect")}>
+                    <button type="button" onClick={() => navigate("/login")}>
                       ¡Comencemos con tu rutina de ejercicios! <ArrowRightCircle size={25} />
                     </button>
                   </div>

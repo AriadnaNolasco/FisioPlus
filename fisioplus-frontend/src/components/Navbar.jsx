@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import "../css/Navbar.css";
 
 const NavbarComponent = () => {
@@ -42,7 +41,15 @@ const NavbarComponent = () => {
   return (
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
-        <Navbar.Brand onClick={handleLogoClick} style={{ cursor: "pointer", color: "#fff", fontWeight: "bold", fontSize: "24px" }}>
+        <Navbar.Brand
+          onClick={handleLogoClick}
+          style={{
+            cursor: "pointer",
+            color: "#fff",
+            fontWeight: "bold",
+            fontSize: "24px",
+          }}
+        >
           FisioPlus
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -52,14 +59,6 @@ const NavbarComponent = () => {
           <Nav className="ms-auto">
             {auth ? (
               <>
-                <Nav.Link
-                  as={Link}
-                  to="/perfil"
-                  className={activeLink === "perfil" ? "active navbar-link" : "navbar-link"}
-                  onClick={() => onUpdateActiveLink("perfil")}
-                >
-                  Perfil
-                </Nav.Link>
                 <Nav.Link
                   as={Link}
                   to="/citas"
@@ -106,11 +105,11 @@ const NavbarComponent = () => {
           </Nav>
           {auth && (
             <span className="navbar-text">
-              <HashLink to="#connect">
+              <Link to="/perfil">
                 <button className="vvd">
                   <span>Mi cuenta</span>
                 </button>
-              </HashLink>
+              </Link>
             </span>
           )}
         </Navbar.Collapse>

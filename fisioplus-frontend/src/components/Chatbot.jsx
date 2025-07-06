@@ -1,44 +1,49 @@
-import '../css/Chatbot.css'; // Importa el archivo CSS correctamente
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "../api/axios";
+import "../css/Chatbot.css";
 
 const Chatbot = () => {
-  const [mensaje, setMensaje] = useState('');
-  const [respuestas, setRespuestas] = useState([]);
-  
-  const handleEnviar = async () => {
-    try {
-      // Cambia la URL al puerto correcto 8085
-      const response = await axios.post('http://localhost:8085/chatbot/sendMessage', {
-        message: mensaje
-      });
+  const [input, setInput] = useState("");
+  const [chat, setChat] = useState([]);
 
-      setRespuestas(prev => [...prev, { mensaje, respuesta: response.data }]);
-      setMensaje('');
-    } catch (error) {
-      console.error('Error al interactuar con el Chatbot:', error);
+  const enviarPregunta = async () => {
+    if (!input.trim()) return;
+
+    setChat([...chat, { from: "user", text: input }]);
+    try {
+      const res = await axios.post("/chatbot/preguntar", { pregunta: input }); // Ajuste: enviar objeto con propiedad 'pregunta'
+      setChat(prev => [...prev, { from: "bot", text: res.data }]);
+    } catch {
+      setChat(prev => [...prev, { from: "bot", text: "Error: no puedo responder ahora." }]);
+    }
+    setInput("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      enviarPregunta();
     }
   };
 
   return (
-    <div>
-      <div className="chatbot-container">
-        {respuestas.map((resp, index) => (
-          <div key={index} className="chat-message">
-            <p><strong>Usuario:</strong> {resp.mensaje}</p>
-            <p><strong>Bot:</strong> {resp.respuesta}</p>
+    <div className="chatbot-container">
+      <div className="chatbot-messages">
+        {chat.map((msg, i) => (
+          <div key={i} className={`chatbot-message ${msg.from}`}>
+            {msg.text}
           </div>
         ))}
       </div>
-      <div className="input-container">
-        <input
-          type="text"
-          value={mensaje}
-          onChange={e => setMensaje(e.target.value)}
-          placeholder="Escribe tu mensaje..."
-        />
-        <button onClick={handleEnviar}>Enviar</button>
-      </div>
+      <input
+        className="chatbot-input"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Escribe tu pregunta..."
+      />
+      <button className="chatbot-send-btn" onClick={enviarPregunta}>
+        Enviar
+      </button>
     </div>
   );
 };
