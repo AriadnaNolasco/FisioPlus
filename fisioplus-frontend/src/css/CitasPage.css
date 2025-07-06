@@ -1,205 +1,312 @@
-.homepage0-background {
-  background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
-    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
-
-}
-
-
-
-/* ================================
-   CONTENEDOR PRINCIPAL DE CITAS
-================================ */
-.citas-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Título de sección */
-.citas-container h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #1f2f45;
-  margin-bottom: 1.5rem;
-}
-
-/* ================================
-   FORMULARIO PARA NUEVA CITA
-================================ */
-.cita-form {
+/* Fondo principal con más espacio arriba para evitar colisión con navbar */
+.citas-page {
+  min-height: 100vh;
+  background: linear-gradient(to right, #1e3a8a, #38bdf8);
+  padding: 6rem 1rem 3rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Formulario de nueva cita */
+.formulario-cita {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 25px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
 }
 
-/* Campos del formulario */
-.cita-form input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.formulario-cita h2 {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.formulario-cita p {
+  text-align: center;
   font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #e0f2fe;
 }
 
-/* Botón de enviar */
-.cita-form button {
-  padding: 0.8rem;
-  background-color: #0ca8a8;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cita-form button:hover {
-  background-color: #098b8b;
-}
-
-/* ================================
-   LISTA DE CITAS REGISTRADAS
-================================ */
-.citas-list {
-  list-style: none;
-  padding: 0;
-}
-
-/* Estilo para cada cita */
-.citas-list li {
-  background-color: #ecf0f1;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  color: #2c3e50;
-  font-size: 1rem;
-}
-
-/* Detalle resaltado dentro de la cita */
-.citas-list li span {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.3rem;
-}
-
-/* ================================
-   HEADER (LOGO Y NAVEGACIÓN)
-================================ */
-.logo {
+.form-cita {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.logo-img {
-  width: 40px;
-  height: auto;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2f45;
-  text-decoration: none;
-}
-
-/* ================================
-   RESPONSIVE PARA HEADER Y NAV
-================================ */
-
-/* Icono de menú hamburguesa */
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
+.form-cita input,
+.form-cita select {
+  padding: 12px;
+  border-radius: 10px;
   border: none;
-  color: #1f2f45;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+}
+
+.form-cita input::placeholder {
+  color: #888;
+}
+
+.btn-confirmar {
+  padding: 15px;
+  background: linear-gradient(to right, #3b82f6, #06b6d4);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+}
+
+.btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(6, 182, 212, 0.4);
+}
+
+.error {
+  color: #ffcccc;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Sección de citas */
+.mis-citas {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mis-citas h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Grid de tarjetas en dos columnas */
+.citas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Tarjeta de cita */
+.cita-tarjeta {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #38bdf8; /* ✅ Modern celeste */
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.2s ease;
+}
+
+.cita-tarjeta:hover {
+  transform: scale(1.02);
+}
+
+/* Encabezado de la tarjeta */
+.cita-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1e3a8a;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* Check verde → celeste moderno */
+.cita-check {
+  background-color: #e0f2fe;
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-size: 16px;
+  color: #0ea5e9;
+}
+
+/* Texto dentro de tarjeta */
+.cita-tarjeta p {
+  margin: 4px 0;
+  color: #0f172a;
+}
+
+/* Botón cancelar */
+.btn-cancelar {
+  margin-top: 10px;
+  background: #f43f5e;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-cancelar:hover {
+  background: #e11d48;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background-color: #6b7280;
+  padding: 10px 16px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-weight: bold;
   cursor: pointer;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-  .homepage-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .menu-toggle {
-    display: block;
-    align-self: flex-end;
-    margin: 0.5rem 1rem;
-  }
-
-  .homepage-nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    padding: 0 1.5rem;
-    background-color: #ffffff;
-  }
-
-  .homepage-nav.show {
-    display: flex;
-  }
-
-  .homepage-nav a,
-  .homepage-nav button {
-    margin: 0.5rem 0;
-    text-align: left;
-  }
+.btn-eliminar:hover {
+  background-color: #4b5563;
 }
 
+/* Cancelada */
+.cancelada {
+  border-left: 6px solid #f43f5e;
+  background-color: #f9fafb;
+  opacity: 0.9;
+}
 
-/* Botones de editar y cancelar */
-.cita-item button {
-  background-color: #f0f0f0;
-  color: #00796b;
-  border: 1px solid #00796b;
-  padding: 8px 16px;
-  border-radius: 5px;
-  margin-right: 10px;
+/* Paginación */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.paginacion button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.paginacion button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ... (todo lo anterior igual) ... */
+
+/* Tarjeta de cita */
+.cita-tarjeta {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.2s ease;
+  border-left: 6px solid transparent;
+  position: relative;
+}
+
+.cita-tarjeta:hover {
+  transform: scale(1.02);
+}
+
+/* Tarjeta confirmada */
+.cita-tarjeta.confirmada {
+  border-left: 6px solid #0ea5e9;
+  background: linear-gradient(to bottom right, #e0f2fe, #ffffff);
+}
+
+/* Tarjeta cancelada */
+.cita-tarjeta.cancelada {
+  border-left: 6px solid #f43f5e;
+  background-color: #fef2f2;
+  opacity: 0.95;
+}
+
+/* Encabezado de la tarjeta */
+.cita-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1e3a8a;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 18px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 5px;
+}
+
+/* Ícono de estado de cita */
+.cita-check {
+  background-color: #e0f2fe;
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-size: 16px;
+  color: #0ea5e9;
+  font-weight: bold;
+}
+
+/* Texto dentro de tarjeta */
+.cita-tarjeta p {
+  margin: 4px 0;
+  color: #0f172a;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background-color: #6b7280;
+  padding: 10px 16px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  background-color: #4b5563;
+}
+.bloques-horas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.bloque-hora {
+  background-color: #06b6d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.cita-item button:hover {
-  background-color: #00796b;
-  color: white;
+.bloque-hora:hover {
+  background-color: #0891b2;
 }
 
-.cita-item button:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
-/* Botones de editar y cancelar */
-.cita-item button {
-  background-color: #f0f0f0;
-  color: #00796b;
-  border: 1px solid #00796b;
-  padding: 8px 16px;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cita-item button:hover {
-  background-color: #00796b;
-  color: white;
-}
-
-.cita-item button:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
+.bloque-hora.seleccionado {
+  background-color: #1e3a8a; /* azul fuerte */
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
 }

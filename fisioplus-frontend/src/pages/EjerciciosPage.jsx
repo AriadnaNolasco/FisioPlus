@@ -1,9 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import Navbar from '../components/Navbar';
-import '../css/EjerciciosPage.css';
-import '../css/HomePage.css';
 import Footer from '../components/Footer';
+import '../css/EjerciciosPage.css';
 
 const EjerciciosPage = () => {
   const [ejercicios, setEjercicios] = useState([]);

@@ -1,4 +1,3 @@
-// --- AuthUserService.java ---
 package com.fisioplus.user_backend.service;
 
 import com.fisioplus.user_backend.dto.RegistroRequestDTO;
@@ -17,4 +16,7 @@ public interface AuthUserService {
     Optional<UsuarioDTO> obtenerPerfilUsuario(String username);
 
     AuthUser registrarUsuarioDesdeGoogle(RegistroRequestDTO dto);
+
+    // Método para actualizar el perfil
+    AuthUser actualizarPerfil(String username, UsuarioDTO usuarioDTO);
 }

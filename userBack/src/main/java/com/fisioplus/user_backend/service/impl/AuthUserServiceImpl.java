@@ -1,4 +1,3 @@
-// --- AuthUserServiceImpl.java ---
 package com.fisioplus.user_backend.service.impl;
 
 import com.fisioplus.user_backend.dto.RegistroRequestDTO;
@@ -118,6 +117,29 @@ public class AuthUserServiceImpl implements AuthUserService, UserDetailsService 
                 true,
                 authorities
         );
+    }
+
+    // Método para actualizar el perfil (con validación para username único)
+    @Override
+    @Transactional
+    public AuthUser actualizarPerfil(String username, UsuarioDTO usuarioDTO) {
+        // Verificar si el nuevo nombre de usuario ya está en uso
+        if (!username.equals(usuarioDTO.getUsername()) && authUserRepository.existsByUsername(usuarioDTO.getUsername())) {
+            throw new RuntimeException("Error: El nombre de usuario ya está en uso!");
+        }
+
+        // Buscar el usuario por nombre de usuario
+        AuthUser user = authUserRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Actualizar la información del usuario
+        user.setUsername(usuarioDTO.getUsername());
+        user.setFirstName(usuarioDTO.getFirstName());
+        user.setLastName(usuarioDTO.getLastName());
+        user.setEmail(usuarioDTO.getEmail());
+
+        // Guardar el usuario actualizado en la base de datos
+        return authUserRepository.save(user);
     }
 
     private UsuarioDTO convertirAUsuarioDTO(AuthUser authUser) {
