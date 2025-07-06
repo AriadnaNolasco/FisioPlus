@@ -2,6 +2,7 @@
 venv/
 env/
 *.sqlite3
+*.env
 
 # Archivos de caché y compilación
 __pycache__/

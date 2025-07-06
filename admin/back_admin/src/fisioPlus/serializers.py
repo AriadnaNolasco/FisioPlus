@@ -1,27 +1,42 @@
 from rest_framework import serializers
-from .models import Paciente, Terapeuta, Cita, Ejercicio, Tratamiento
+from .models import Terapeuta
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer, UserSerializer as BaseUserSerializer
 
-class PacienteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Paciente
-        fields = '__all__'
+class TerapeutaRegisterSerializer(BaseUserCreateSerializer):
+    password2 = serializers.CharField(write_only=True)
 
-class TerapeutaSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta(BaseUserCreateSerializer.Meta):
         model = Terapeuta
-        fields = '__all__'
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'especialidad',
+            'password',
+            'password2',
+        )
 
-class CitaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Cita
-        fields = '__all__'
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError("Las contraseñas no coinciden.")
+        return data
 
-class EjercicioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ejercicio
-        fields = '__all__'
+    def create(self, validated_data):
+        validated_data.pop('password2')
+        return super().create(validated_data)
 
-class TratamientoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tratamiento
-        fields = '__all__'
+# Este es para obtener los datos del terapeuta logueado
+class TerapeutaSerializer(BaseUserSerializer):
+    class Meta(BaseUserSerializer.Meta):
+        model = Terapeuta
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'especialidad',
+        )
+

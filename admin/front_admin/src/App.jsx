@@ -1,12 +1,7 @@
-import { useState } from 'react'
+import AppRoutes from './routes/AppRoutes'
 
 function App() {
-
-  return (
-    <>
-      <h1>Welcome to the Admin Panel</h1>
-    </>
-  )
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
