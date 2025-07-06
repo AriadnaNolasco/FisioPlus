@@ -1,5 +1,7 @@
 package com.fisioplus.user_backend.service.impl;
 
+import com.fisioplus.user_backend.dto.HorarioDTO;
+import com.fisioplus.user_backend.service.HorarioService;
 import com.fisioplus.user_backend.dto.CitaDTO;
 import com.fisioplus.user_backend.entity.AuthUser;
 import com.fisioplus.user_backend.entity.Cita;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +25,7 @@ public class CitaServiceImpl implements CitaService {
 
     private final CitaRepository citaRepository;
     private final AuthUserRepository userRepository;
+    private final HorarioService horarioService;
 
     @Override
     public Page<Cita> listarPorPaciente(Long pacienteId, Pageable pageable) {
@@ -34,11 +38,27 @@ public class CitaServiceImpl implements CitaService {
             throw new RuntimeException("No se permiten citas el mismo día.");
         }
 
-        // ✅ Validar si ese profesional ya tiene cita en esa hora
-        if (citaRepository.existsByProfesionalAndFechaHora(dto.getProfesional(), dto.getFechaHora())) {
-            throw new RuntimeException("El profesional ya tiene una cita en ese horario.");
+        AuthUser terapeuta = userRepository.findById(Math.toIntExact(dto.getTerapeutaId()))
+                .orElseThrow(() -> new RuntimeException("Terapeuta no encontrado"));
+
+        if (citaRepository.existsByTerapeutaAndFechaHora(terapeuta, dto.getFechaHora())) {
+            throw new RuntimeException("El terapeuta ya tiene una cita en ese horario.");
         }
 
+        String nombreDia = dto.getFechaHora().getDayOfWeek().name();
+        List<HorarioDTO> horarios = horarioService.obtenerHorariosPorTerapeuta(String.valueOf(terapeuta.getId()));
+
+        boolean horarioValido = horarios.stream().anyMatch(h ->
+                h.getDiaSemana().equalsIgnoreCase(nombreDia) &&
+                        !dto.getFechaHora().toLocalTime().isBefore(h.getHoraInicio()) &&
+                        !dto.getFechaHora().toLocalTime().isAfter(h.getHoraFin())
+        );
+
+        if (!horarioValido) {
+            throw new RuntimeException("El terapeuta no atiende en ese día u horario.");
+        }
+
+        // Crear cita
         AuthUser paciente = userRepository.findById(Math.toIntExact(dto.getPacienteId()))
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
 
@@ -46,7 +66,7 @@ public class CitaServiceImpl implements CitaService {
         cita.setPaciente(paciente);
         cita.setFechaHora(dto.getFechaHora());
         cita.setMotivo(dto.getMotivo());
-        cita.setProfesional(dto.getProfesional());
+        cita.setTerapeuta(terapeuta);
         cita.setEstado(dto.getEstado() != null ? dto.getEstado() : EstadoCita.RESERVADA);
 
         return citaRepository.save(cita);
@@ -74,9 +94,34 @@ public class CitaServiceImpl implements CitaService {
             throw new RuntimeException("Solo puedes editar con 24h de anticipación.");
         }
 
+        AuthUser terapeuta = userRepository.findById(Math.toIntExact(dto.getTerapeutaId()))
+                .orElseThrow(() -> new RuntimeException("Terapeuta no encontrado"));
+
+        String nombreDia = dto.getFechaHora().getDayOfWeek().name();
+        List<HorarioDTO> horarios = horarioService.obtenerHorariosPorTerapeuta(String.valueOf(terapeuta.getId()));
+
+        boolean horarioValido = horarios.stream().anyMatch(h ->
+                h.getDiaSemana().equalsIgnoreCase(nombreDia) &&
+                        !dto.getFechaHora().toLocalTime().isBefore(h.getHoraInicio()) &&
+                        !dto.getFechaHora().toLocalTime().isAfter(h.getHoraFin())
+        );
+
+        if (!horarioValido) {
+            throw new RuntimeException("El terapeuta no atiende en ese día u horario.");
+        }
+
+        // ✅ Validar que no haya otra cita con ese profesional en ese horario (distinta de la actual)
+        boolean citaYaExiste = citaRepository.existsByTerapeutaAndFechaHoraAndIdNot(
+                terapeuta, dto.getFechaHora(), citaId
+        );
+        if (citaYaExiste) {
+            throw new RuntimeException("Ese horario ya está ocupado por otra cita.");
+        }
+
+        // Actualizar datos
         cita.setMotivo(dto.getMotivo());
         cita.setFechaHora(dto.getFechaHora());
-        cita.setProfesional(dto.getProfesional());
+        cita.setTerapeuta(terapeuta);
 
         citaRepository.save(cita);
     }

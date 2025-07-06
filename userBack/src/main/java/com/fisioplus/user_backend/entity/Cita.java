@@ -17,12 +17,13 @@ public class Cita {
     @ManyToOne
     private AuthUser paciente;
 
-    private LocalDateTime fechaHora;
+    @ManyToOne
+    private AuthUser terapeuta;
 
+    private LocalDateTime fechaHora;
     private String motivo;
 
     @Enumerated(EnumType.STRING)
     private EstadoCita estado;
 
-    private String profesional; // Nuevo campo
 }

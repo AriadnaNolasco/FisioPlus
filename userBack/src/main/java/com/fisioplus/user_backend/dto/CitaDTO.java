@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,14 +18,14 @@ public class CitaDTO {
     private Long pacienteId;
 
     @NotNull
+    private Long terapeutaId;
+
+    @NotNull
     @Future
     private LocalDateTime fechaHora;
 
     @NotBlank
     private String motivo;
-
-    @NotBlank
-    private String profesional;
 
     private EstadoCita estado;
 }
