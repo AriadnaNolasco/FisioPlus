@@ -8,7 +8,7 @@ import Chatbot from '../components/Chatbot'; // Importar el componente Chatbot
 
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
-  const userName = auth?.user?.firstName || 'Usuario';
+  const userName = auth?.user?.username || 'Usuario';
 
   return (
     <>
