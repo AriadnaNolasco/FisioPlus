@@ -182,7 +182,7 @@ const CitasPage = () => {
             >
               <option value="">Selecciona un profesional</option>
               {terapeutas.map(t => (
-                <option key={t.id} value={t.id}>{t.nombre}</option>
+                <option key={t.id} value={t.id}>{t.first_name} {t.last_name}</option>
               ))}
             </select>
 
