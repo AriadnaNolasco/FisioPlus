@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosSpring = axios.create({
-  baseURL: 'http://localhost:8085/api',
+  baseURL: 'http://localhost:8000/api',
 });
 
 axiosSpring.interceptors.request.use((config) => {

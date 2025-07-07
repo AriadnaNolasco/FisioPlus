@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
-import axios from '../api/axios';
+import axiosSpring from '../api/axiosSpring'; // 👉 para backend Spring
+import { obtenerTerapeutas } from '../api/terapeutaService'; // 👉 para backend Django
 import { AuthContext } from '../auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,23 +11,24 @@ import '../css/CitasPage.css';
 
 const CitasPage = () => {
   const { user } = useContext(AuthContext);
+
+  const [terapeutas, setTerapeutas] = useState([]);
+  const [horarios, setHorarios] = useState([]);
   const [citas, setCitas] = useState([]);
-  const [page, setPage] = useState(0);
+
   const [horariosOcupados, setHorariosOcupados] = useState([]);
+  const [page, setPage] = useState(0);
 
   const [nuevaCita, setNuevaCita] = useState({
     motivo: '',
     fecha: '',
     hora: '',
-    profesional: ''
+    terapeutaId: ''
   });
 
   const [error, setError] = useState('');
 
-  const profesionales = [
-    'Rafael Ulises Huamanyauri Solis',
-    'Roxana Pilar Dávila Nolasco'
-  ];
+
 
   const motivosFrecuentes = [
     'Dolor lumbar',
@@ -39,19 +41,67 @@ const CitasPage = () => {
     'Otro'
   ];
 
-  const horariosPorTurno = {
-    mañana: ['09:00', '10:00', '11:00', '12:00'],
-    tarde: ['13:00', '14:00', '15:00', '16:00', '17:00']
+  // Obtener terapeutas
+  useEffect(() => {
+    obtenerTerapeutas()
+      .then(res => {
+        console.log('✅ Terapeutas recibidos:', res);
+        setTerapeutas(res);
+      })
+      .catch(err => console.error('❌ Error al obtener terapeutas', err));
+  }, []);
+
+  // Obtener horarios por terapeuta y fecha
+  useEffect(() => {
+    if (nuevaCita.terapeutaId && nuevaCita.fecha) {
+      const diaSemana = new Date(nuevaCita.fecha)
+        .toLocaleDateString('en-US', { weekday: 'long' })
+        .toUpperCase();
+
+      const token = localStorage.getItem('token');
+
+      axiosDjango.get(`/horarios/?terapeuta=${nuevaCita.terapeutaId}`)
+        .then(res => {
+          const data = res.data;
+          const horariosDelDia = data.filter(h => h.dia_semana === diaSemana);
+          setHorarios(horariosDelDia);
+        })
+        .catch(err => console.error('❌ Error al obtener horarios', err));
+    } else {
+      setHorarios([]);
+    }
+  }, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+
+  const agruparHorarios = () => {
+    const grupos = { mañana: [], tarde: [] };
+    horarios.forEach(horario => {
+      const inicio = horario.hora_inicio.slice(0, 5);
+      const fin = horario.hora_fin.slice(0, 5);
+      let [h, m] = inicio.split(':').map(Number);
+      const [hFin, mFin] = fin.split(':').map(Number);
+
+      while (h < hFin || (h === hFin && m < mFin)) {
+        const hora = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+        const turno = h < 13 ? 'mañana' : 'tarde';
+        grupos[turno].push(hora);
+        m += 60;
+        if (m >= 60) {
+          h += 1;
+          m = 0;
+        }
+      }
+    });
+    return grupos;
   };
 
   const fetchCitas = () => {
     if (!user?.id) return;
-    axios.get(`/citas/paciente/${user.id}?page=${page}&size=5`)
+    axiosSpring.get(`/citas/paciente/${user.id}?page=${page}&size=5`)
       .then(res => {
         setCitas(res.data.content);
         const ocupados = res.data.content
           .filter(c => c.estado !== 'CANCELADA')
-          .map(c => ({ profesional: c.profesional, fechaHora: c.fechaHora }));
+          .map(c => ({ terapeutaId: c.terapeutaId, fechaHora: c.fechaHora }));
         setHorariosOcupados(ocupados);
       })
       .catch(err => console.error(err));
@@ -65,7 +115,6 @@ const CitasPage = () => {
     e.preventDefault();
     setError('');
 
-    // Convertir la fecha y hora seleccionadas a un objeto Date
     const [anio, mes, dia] = nuevaCita.fecha.split('-').map(Number);
     const [hora, minuto] = nuevaCita.hora.split(':').map(Number);
     const fechaSeleccionada = new Date(anio, mes - 1, dia, hora, minuto);
@@ -77,7 +126,7 @@ const CitasPage = () => {
     }
 
     const conflicto = horariosOcupados.find(c =>
-      c.profesional === nuevaCita.profesional &&
+      c.terapeutaId === nuevaCita.terapeutaId &&
       new Date(c.fechaHora).getTime() === fechaSeleccionada.getTime()
     );
 
@@ -86,20 +135,17 @@ const CitasPage = () => {
       return;
     }
 
-    // Convertir la fecha y hora a ISO string para enviar al backend
-    const fechaHoraISO = fechaSeleccionada.toISOString().slice(0, 19); // Elimina los segundos y milisegundos
-
     const payload = {
       pacienteId: user?.id,
-      fechaHora: fechaHoraISO, // Enviamos la fecha en formato ISO
+      terapeutaId: nuevaCita.terapeutaId,
       motivo: nuevaCita.motivo,
-      profesional: nuevaCita.profesional
+      fechaHora: fechaSeleccionada.toISOString().slice(0, 19)
     };
 
-    axios.post('/citas', payload)
+    axiosSpring.post('/citas', payload)
       .then(() => {
         toast.success('✅ ¡Cita agendada con éxito!');
-        setNuevaCita({ motivo: '', fecha: '', hora: '', profesional: '' });
+        setNuevaCita({ motivo: '', fecha: '', hora: '', terapeutaId: '' });
         fetchCitas();
       })
       .catch(err => {
@@ -112,7 +158,7 @@ const CitasPage = () => {
   };
 
   const eliminarCita = (id) => {
-    axios.delete(`/citas/${id}`)
+    axiosSpring.delete(`/citas/${id}`)
       .then(() => {
         toast.success('Cita eliminada de forma permanente.');
         fetchCitas();
@@ -126,6 +172,8 @@ const CitasPage = () => {
   const formatearHora = (fecha) =>
     new Date(fecha).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
 
+  const horariosAgrupados = agruparHorarios();
+
   return (
     <>
       <Navbar />
@@ -136,6 +184,7 @@ const CitasPage = () => {
           <p>Da el primer paso hacia tu bienestar. Elige un profesional y un horario.</p>
 
           <form onSubmit={crearCita} className="form-cita">
+            {/* Motivo */}
             <select
               value={nuevaCita.motivo}
               onChange={e => setNuevaCita({ ...nuevaCita, motivo: e.target.value })}
@@ -165,12 +214,14 @@ const CitasPage = () => {
               value={nuevaCita.fecha}
               onChange={e => setNuevaCita({ ...nuevaCita, fecha: e.target.value })}
               required
+              disabled={!nuevaCita.terapeutaId}
             />
 
+            {/* Horarios */}
             <div className="horarios-turnos">
-              {Object.entries(horariosPorTurno).map(([turno, horas]) => (
+              {Object.entries(horariosAgrupados).map(([turno, horas]) => (
                 <div key={turno}>
-                  <strong>{`Turno ${turno[0].toUpperCase() + turno.slice(1)}`}</strong>
+                  <strong>Turno {turno[0].toUpperCase() + turno.slice(1)}</strong>
                   <div className="bloques-horas">
                     {horas.map(h => (
                       <button
@@ -186,17 +237,6 @@ const CitasPage = () => {
                 </div>
               ))}
             </div>
-
-            <select
-              value={nuevaCita.profesional}
-              onChange={e => setNuevaCita({ ...nuevaCita, profesional: e.target.value })}
-              required
-            >
-              <option value="">Selecciona un profesional</option>
-              {profesionales.map(p => (
-                <option key={p} value={p}>{p}</option>
-              ))}
-            </select>
 
             <button type="submit" className="btn-confirmar">Confirmar Cita</button>
             {error && <p className="error">{error}</p>}
@@ -215,7 +255,6 @@ const CitasPage = () => {
                 <p><strong>Profesional:</strong> {cita.profesional}</p>
                 <p><strong>Fecha:</strong> {formatearFecha(cita.fechaHora)}</p>
                 <p><strong>Hora:</strong> {formatearHora(cita.fechaHora)}</p>
-                <p><strong>Modalidad:</strong> Presencial</p>
               </div>
             ))}
           </div>
@@ -234,8 +273,6 @@ const CitasPage = () => {
                   <p><strong>Profesional:</strong> {cita.profesional}</p>
                   <p><strong>Fecha:</strong> {formatearFecha(cita.fechaHora)}</p>
                   <p><strong>Hora:</strong> {formatearHora(cita.fechaHora)}</p>
-                  <p><strong>Modalidad:</strong> Presencial</p>
-
                   <button onClick={() => eliminarCita(cita.id)} className="btn-eliminar">
                     Eliminar cita
                   </button>
