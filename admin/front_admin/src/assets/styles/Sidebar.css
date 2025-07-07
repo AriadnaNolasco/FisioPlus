@@ -1,0 +1,242 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+.sidebar-header {
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  color: #3b82f6;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.brand-line {
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  margin: 0.25rem 0;
+  padding: 0 1rem;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-link:hover::before {
+  opacity: 1;
+}
+
+.menu-link:hover {
+  color: white;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.menu-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover .menu-icon-wrapper {
+  background: rgba(59, 130, 246, 0.2);
+  transform: scale(1.1);
+}
+
+.menu-icon {
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover .menu-icon {
+  color: #3b82f6;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+}
+
+.menu-text {
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.menu-arrow {
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-link:hover .menu-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+  color: #3b82f6;
+}
+
+.sidebar-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.logout-button:hover::before {
+  left: 100%;
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar personalizado */
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 2px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 260px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-text {
+    font-size: 0.9rem;
+  }
+
+  .sidebar-title {
+    font-size: 1.25rem;
+  }
+}
