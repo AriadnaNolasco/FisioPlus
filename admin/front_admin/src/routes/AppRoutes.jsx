@@ -6,9 +6,11 @@ import useAuthStore from '../store/authStore';
 
 
 function PrivateRoute({ children }) {
-  const { token } = useAuthStore(); // ✅ extrae solo el token desde Zustand
+  const { token } = useAuthStore();
+  console.log('PrivateRoute token:', token);
   return token ? children : <Navigate to="/login" />;
 }
+
 
 export default function AppRoutes() {
   return (

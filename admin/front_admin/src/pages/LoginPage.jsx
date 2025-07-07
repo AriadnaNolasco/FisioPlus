@@ -1,4 +1,3 @@
-// src/pages/LoginPage.jsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, getCurrentUser } from '../services/authService';
@@ -9,7 +8,7 @@ import useAuthStore from '../store/authStore';
 export default function LoginPage() {
     const [form, setForm] = useState({ username: '', password: '' });
     const navigate = useNavigate();
-    const { setAccessToken, setRefreshToken, setUser } = useAuthStore();
+    const { setToken, setUser } = useAuthStore();
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -17,10 +16,9 @@ export default function LoginPage() {
         e.preventDefault();
         try {
             const res = await login(form);
-            const { access, refresh } = res.data;
+            const { access } = res.data;
 
-            setAccessToken(access);
-            setRefreshToken(refresh);
+            setToken(access);
 
             const userRes = await getCurrentUser(access);
             setUser(userRes.data);

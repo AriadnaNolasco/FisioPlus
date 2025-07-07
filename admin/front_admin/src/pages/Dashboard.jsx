@@ -5,7 +5,7 @@ import '../assets/styles/dashboard.css';
 import useAuthStore from '../store/authStore';
 
 export default function Dashboard() {
-  const { user, logout, accessToken } = useAuthStore();
+  const { user, logout, token } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,11 +14,10 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    if (!accessToken || !user) {
-      // Si no hay token o usuario cargado, redirige al login
+    if (!token || !user) {
       navigate('/login');
     }
-  }, [accessToken, user, navigate]);
+  }, [token, user, navigate]);
 
   return (
     <div className="dashboard-container">
