@@ -7,10 +7,9 @@ import '../css/EjerciciosPage.css';
 const EjerciciosPage = () => {
   const [ejercicios, setEjercicios] = useState([]);
   const [search, setSearch] = useState('');
-  const [filtro, setFiltro] = useState('todos');  // Filtro por tipo de ejercicio
+  const [filtro, setFiltro] = useState('todos');
   const { logout } = useContext(AuthContext);
 
-  // ✅ Cargar ejercicios simulados al iniciar
   useEffect(() => {
     setEjercicios([
       {
@@ -19,7 +18,7 @@ const EjerciciosPage = () => {
         descripcion: "Gira la cabeza suavemente de un lado a otro.",
         repeticiones: "3 series de 10",
         videoUrl: "https://www.youtube.com/watch?v=w4H0N_h_G9U",
-        tipo: "flexibilidad"  // Tipo de ejercicio
+        tipo: "flexibilidad",
       },
       {
         id: 2,
@@ -27,7 +26,7 @@ const EjerciciosPage = () => {
         descripcion: "Acostado boca arriba, eleva la pelvis.",
         repeticiones: "4 series de 15",
         videoUrl: "https://www.youtube.com/watch?v=2L2lnxIcNmo",
-        tipo: "pasivo"  // Tipo de ejercicio
+        tipo: "pasivo",
       },
       {
         id: 3,
@@ -35,7 +34,7 @@ const EjerciciosPage = () => {
         descripcion: "Apoya las manos en el suelo y baja el cuerpo.",
         repeticiones: "4 series de 12",
         videoUrl: "https://www.youtube.com/watch?v=IODxDxX7oi4",
-        tipo: "activo"  // Tipo de ejercicio
+        tipo: "activo",
       },
       {
         id: 4,
@@ -43,7 +42,7 @@ const EjerciciosPage = () => {
         descripcion: "Flexiona las piernas manteniendo la espalda recta.",
         repeticiones: "3 series de 20",
         videoUrl: "https://www.youtube.com/watch?v=aclHkVaku9U",
-        tipo: "fortalecimiento"  // Tipo de ejercicio
+        tipo: "fortalecimiento",
       },
       {
         id: 5,
@@ -51,7 +50,7 @@ const EjerciciosPage = () => {
         descripcion: "Mantén el cuerpo recto apoyado en antebrazos y pies.",
         repeticiones: "3 series de 30 segundos",
         videoUrl: "https://www.youtube.com/watch?v=pSHjTRCQxIw",
-        tipo: "fortalecimiento"  // Tipo de ejercicio
+        tipo: "fortalecimiento",
       },
       {
         id: 6,
@@ -59,36 +58,32 @@ const EjerciciosPage = () => {
         descripcion: "Acostado boca arriba, levanta las caderas hacia el techo.",
         repeticiones: "4 series de 10",
         videoUrl: "https://www.youtube.com/watch?v=FOE4eoO4nOk",
-        tipo: "fortalecimiento"  // Tipo de ejercicio
+        tipo: "fortalecimiento",
       }
     ]);
   }, []);
 
-  // 🔎 Filtro de ejercicios
   const ejerciciosFiltrados = ejercicios.filter(ej => 
     (filtro === 'todos' || ej.tipo === filtro) && ej.nombre.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <>
-      {/* ✅ Navbar común */}
       <Navbar />
 
-      {/* 🌄 Fondo y contenido principal */}
       <div className="homepage2-background">
         <main className="ejercicios-container">
-          <h2>Ejercicios Recomendados</h2>
+          <div className="ejercicios-header">
+            <h2>Ejercicios Recomendados </h2>
+            <input
+              type="text"
+              placeholder="¿Qué estás buscando?"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="search-input"
+            />
+          </div>
 
-          {/* 🔍 Input de búsqueda */}
-          <input
-            type="text"
-            placeholder="Buscar ejercicio..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="search-input"
-          />
-
-          {/* 🧘‍♂️ Filtro de tipo de ejercicio */}
           <div className="filters">
             <button onClick={() => setFiltro('todos')}>Todos</button>
             <button onClick={() => setFiltro('activo')}>Ejercicios Activos</button>
@@ -97,7 +92,6 @@ const EjerciciosPage = () => {
             <button onClick={() => setFiltro('flexibilidad')}>Ejercicios de Flexibilidad</button>
           </div>
 
-          {/* 🧘‍♂️ Tarjetas de ejercicios */}
           <div className="ejercicios-grid">
             {ejerciciosFiltrados.map(ej => (
               <div key={ej.id} className="ejercicio-card">
@@ -118,7 +112,6 @@ const EjerciciosPage = () => {
           </div>
         </main>
 
-        {/* 📌 Pie de página */}
         <Footer />
       </div>
     </>
