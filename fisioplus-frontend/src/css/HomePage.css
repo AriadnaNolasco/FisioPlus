@@ -320,3 +320,164 @@ button:hover {
 .opciones input[type="checkbox"] {
   margin: 0;
 }
+/* Carrusel de imágenes en la sección de bienvenida */
+.carousel-container {
+  display: flex;
+  justify-content: center;  /* Centra el carrusel horizontalmente */
+  align-items: center;      /* Centra el carrusel verticalmente */
+  width: 100%;
+  height: 70vh;             /* Ajusta la altura del contenedor del carrusel */
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  justify-content: center; /* Centra las imágenes dentro del carrusel */
+}
+
+.carousel-wrapper img {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa toda la altura disponible */
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  border-radius: 0;
+}
+/* Carrusel de imágenes en la sección de bienvenida */
+.carousel-container {
+  display: flex;
+  justify-content: center;  /* Asegura que el carrusel esté centrado horizontalmente */
+  align-items: center;      /* Asegura que el carrusel esté centrado verticalmente */
+  width: 100%;              /* Ocupa todo el ancho disponible */
+  height: 70vh;             /* Ajusta la altura */
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+/* Contenedor de las imágenes del carrusel */
+.carousel-wrapper {
+  display: flex;
+  justify-content: center; /* Asegura que las imágenes del carrusel estén centradas */
+  align-items: center;     /* Centra las imágenes verticalmente */
+  transition: transform 0.5s ease;
+}
+
+.carousel-wrapper img {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: auto; /* Mantiene la relación de aspecto de las imágenes */
+  object-fit: cover; /* Asegura que las imágenes cubran el área sin distorsionarse */
+  border-radius: 0;
+}
+/* Sección de bienvenida */
+.welcome-section {
+  display: flex;
+  align-items: center;  /* Centra verticalmente */
+  justify-content: center;  /* Centra horizontalmente */
+  gap: 5rem;
+  width: 100%;  /* Ocupa todo el ancho disponible */
+  max-width: 1200px; /* Limita el tamaño máximo */
+  padding: 2rem 0.5rem;
+  background-color: #f7fafa;
+  border-radius: 90px;
+  margin-bottom: 2rem;
+  margin-left: auto;  /* Centra la sección dentro de su contenedor */
+  margin-right: auto; /* Centra la sección dentro de su contenedor */
+}
+
+/* Carrusel de imágenes en la sección de bienvenida */
+.carousel-container {
+  display: flex;
+  justify-content: center;  /* Centra el carrusel horizontalmente */
+  align-items: center;      /* Centra el carrusel verticalmente */
+  width: 100%;
+  max-width: 900px;        /* Limita el tamaño del carrusel */
+  height: 70vh;            /* Ajusta la altura del contenedor del carrusel */
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 0 10px;         /* Ajusta el espaciado para evitar que la imagen se corte */
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center; /* Asegura que las imágenes del carrusel estén centradas */
+  align-items: center;     /* Centra las imágenes verticalmente */
+  transition: transform 0.5s ease;
+}
+
+.carousel-wrapper img {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa toda la altura disponible */
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  border-radius: 0;
+}
+/* Carrusel de imágenes en la sección de bienvenida */
+.carousel-container {
+  display: flex;
+  justify-content: center;  /* Centra el carrusel horizontalmente */
+  align-items: center;      /* Centra el carrusel verticalmente */
+  width: 100%;
+  height: 80vh;             /* Aumenta la altura para que las imágenes sean más grandes */
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;  /* Centra las imágenes dentro del carrusel */
+  align-items: center;      /* Centra las imágenes verticalmente */
+  transition: transform 0.5s ease;
+}
+
+.carousel-wrapper img {
+  width: 100%;             /* Las imágenes ocuparán todo el ancho disponible */
+  height: 100%;            /* Las imágenes ocuparán toda la altura disponible */
+  object-fit: cover;       /* Asegura que las imágenes cubran el espacio sin distorsionarse */
+  border-radius: 0;
+}
+/* Fondo general de la página */
+body {
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Asegura que el fondo cubra toda la altura */
+}
+/* Estilo para el fondo de la página principal (Home) */
+.homepage-background {
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+  width: 100%;
+  margin: 0; /* Elimina márgenes adicionales */
+  padding: 0; /* Elimina padding adicional */
+}
+/* Contenedor general */
+.homepage-container {
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh; /* Ajuste para cubrir toda la altura */
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+/* Eliminar cualquier borde o margen innecesario */
+.homepage-container {
+  margin: 0; /* Asegura que no haya márgenes adicionales */
+  padding: 0; /* Asegura que no haya padding extra */
+  border: none; /* Elimina cualquier borde */
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Fondo de la página */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* Footer */
+.homepage-footer {
+  background-color: #000; /* Fondo negro */
+  text-align: center;
+  padding: 1.5rem;
+  width: 100%;
+  color: #00bfa5; /* Ajusta el color del texto si es necesario */
+  margin-top: 0; /* Elimina cualquier margen superior extra */
+}

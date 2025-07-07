@@ -458,3 +458,30 @@ select {
 .react-calendar__month-view__weekdays__weekday:nth-child(7) {
   content: "Dom";
 }
+/* Fondo general de la página (degradado azul) */
+.homepage0-background {
+  background-image: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-attachment: fixed;
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+/* Contenedor principal de la página de progreso */
+.progreso-container {
+  padding: 3rem;
+  max-width: 900px;
+  margin: 20px auto;
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}

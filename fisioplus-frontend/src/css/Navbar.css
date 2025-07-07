@@ -157,7 +157,7 @@ span.navbar-text {
   width: 0%;
   height: 100%;
   position: absolute;
-  background-color: #fff;
+  background: linear-gradient(to right, #1e3a8a, #38bdf8);
   left: 0;
   top: 0;
   z-index: -1;
