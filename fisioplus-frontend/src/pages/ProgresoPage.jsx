@@ -1,3 +1,5 @@
+// JSX React (ProgresoPage.js)
+
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import axios from '../api/axios';
@@ -6,8 +8,6 @@ import Footer from '../components/Footer';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../css/ProgresoPage.css';
-import 'react-toastify/dist/ReactToastify.css';  // Asegúrate de importar los estilos
-
 
 import {
   LineChart,
@@ -29,7 +29,7 @@ const ProgresoPage = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date());
   const [progresos, setProgresos] = useState([]);
   const [error, setError] = useState('');
-  const [mostrarHistorial, setMostrarHistorial] = useState(false); // Estado para mostrar/ocultar historial
+  const [mostrarHistorial, setMostrarHistorial] = useState(false);
 
   // Fetch progress data
   useEffect(() => {
@@ -62,12 +62,10 @@ const ProgresoPage = () => {
 
   // Handle form submission
   const handleSubmit = async () => {
-    // Obtener la fecha actual
     const today = new Date();
-    const todayString = today.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+    const todayString = today.toISOString().slice(0, 10);
     const selectedDateString = fechaSeleccionada.toISOString().slice(0, 10);
 
-    // Comprobar que la fecha seleccionada no sea futura ni pasada
     if (selectedDateString !== todayString) {
       alert('Solo puedes registrar el progreso para el día de hoy.');
       return;
@@ -78,11 +76,7 @@ const ProgresoPage = () => {
       return;
     }
 
-    const avanceCalculado = calcularAvance(
-      estadoFisico,
-      estadoEmocional,
-      actividadFisica
-    );
+    const avanceCalculado = calcularAvance(estadoFisico, estadoEmocional, actividadFisica);
 
     const descripcion = `Estado físico: ${estadoFisico}, Estado emocional: ${estadoEmocional}, Actividad física: ${actividadFisica}`;
 
@@ -142,134 +136,136 @@ const ProgresoPage = () => {
   return (
     <>
       <Navbar />
-      <div className="homepage-container">
-        <div className="page-wrapper">
-          <main className="progreso-container">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2>Mi Progreso</h2>
-              <button
-                className="submit-progreso"
-                onClick={() => setMostrarHistorial(!mostrarHistorial)}
-              >
-                {mostrarHistorial ? 'Ocultar Historial' : 'Mostrar Historial'}
-              </button>
-            </div>
-
-            <section className="formulario-progreso">
-              <div className="calendar-container">
-                <Calendar
-                  onChange={setFechaSeleccionada}
-                  value={fechaSeleccionada}
-                />
-              </div>
-
-              <div className="opciones">
-                <h4>Estado Físico</h4>
-                <select
-                  value={estadoFisico}
-                  onChange={e => setEstadoFisico(e.target.value)}
+      <div className="homepage0-background"> {/* Aquí está el fondo de la página */}
+        <div className="homepage-container">
+          <div className="page-wrapper">
+            <main className="progreso-container">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <h2>Mi Progreso</h2>
+                <button
+                  className="submit-progreso"
+                  onClick={() => setMostrarHistorial(!mostrarHistorial)}
                 >
-                  <option value="">Selecciona un estado</option>
-                  <option value="Sin dolor">Sin dolor</option>
-                  <option value="Dolor leve">Dolor leve</option>
-                  <option value="Dolor moderado">Dolor moderado</option>
-                  <option value="Dolor fuerte">Dolor fuerte</option>
-                </select>
+                  {mostrarHistorial ? 'Ocultar Historial' : 'Mostrar Historial'}
+                </button>
               </div>
 
-              <div className="opciones">
-                <h4>Estado Emocional</h4>
-                <select
-                  value={estadoEmocional}
-                  onChange={e => setEstadoEmocional(e.target.value)}
-                >
-                  <option value="">Selecciona un estado</option>
-                  <option value="Tranquilo/a">Tranquilo/a</option>
-                  <option value="Ansioso/a">Ansioso/a</option>
-                  <option value="Motivado/a">Motivado/a</option>
-                  <option value="Irritado/a">Irritado/a</option>
-                </select>
-              </div>
-
-              <div className="opciones">
-                <h4>Actividad Física</h4>
-                <select
-                  value={actividadFisica}
-                  onChange={e => setActividadFisica(e.target.value)}
-                >
-                  <option value="">Selecciona una actividad</option>
-                  <option value="Sedentario/a">Sedentario/a</option>
-                  <option value="Activa/o">Activa/o</option>
-                  <option value="Ejercicios completados">Ejercicios completados</option>
-                </select>
-              </div>
-
-              <div className="opciones">
-                <label htmlFor="ejercicioCompletado">
-                  Ejercicio completado:
-                  <input
-                    type="checkbox"
-                    id="ejercicioCompletado"
-                    checked={ejercicioCompletado}
-                    onChange={e => setEjercicioCompletado(e.target.checked)}
+              <section className="formulario-progreso">
+                <div className="calendar-container">
+                  <Calendar
+                    onChange={setFechaSeleccionada}
+                    value={fechaSeleccionada}
                   />
-                </label>
-              </div>
+                </div>
 
-              <button onClick={handleSubmit} className="submit-progreso">
-                Registrar Progreso
-              </button>
-            </section>
+                <div className="opciones">
+                  <h4>Estado Físico</h4>
+                  <select
+                    value={estadoFisico}
+                    onChange={e => setEstadoFisico(e.target.value)}
+                  >
+                    <option value="">Selecciona un estado</option>
+                    <option value="Sin dolor">Sin dolor</option>
+                    <option value="Dolor leve">Dolor leve</option>
+                    <option value="Dolor moderado">Dolor moderado</option>
+                    <option value="Dolor fuerte">Dolor fuerte</option>
+                  </select>
+                </div>
 
-            {mostrarHistorial && (
-              <section className="lista-progresos">
-                <h3>Historial</h3>
-                {progresos.length === 0 ? (
-                  <p>No hay progresos registrados.</p>
-                ) : (
-                  <>
-                    {progresos.map(p => (
-                      <div key={p.fecha + p.avancePorcentaje} className="progreso-item">
-                        <p><strong>{p.fecha}</strong></p>
-                        <p>{p.descripcion}</p>
-                        <div className="barra-externa">
-                          <div
-                            className="barra-interna"
-                            style={{ width: `${p.avancePorcentaje}%` }}
-                          >
-                            {p.avancePorcentaje}%
+                <div className="opciones">
+                  <h4>Estado Emocional</h4>
+                  <select
+                    value={estadoEmocional}
+                    onChange={e => setEstadoEmocional(e.target.value)}
+                  >
+                    <option value="">Selecciona un estado</option>
+                    <option value="Tranquilo/a">Tranquilo/a</option>
+                    <option value="Ansioso/a">Ansioso/a</option>
+                    <option value="Motivado/a">Motivado/a</option>
+                    <option value="Irritado/a">Irritado/a</option>
+                  </select>
+                </div>
+
+                <div className="opciones">
+                  <h4>Actividad Física</h4>
+                  <select
+                    value={actividadFisica}
+                    onChange={e => setActividadFisica(e.target.value)}
+                  >
+                    <option value="">Selecciona una actividad</option>
+                    <option value="Sedentario/a">Sedentario/a</option>
+                    <option value="Activa/o">Activa/o</option>
+                    <option value="Ejercicios completados">Ejercicios completados</option>
+                  </select>
+                </div>
+
+                <div className="opciones">
+                  <label htmlFor="ejercicioCompletado">
+                    Ejercicio completado:
+                    <input
+                      type="checkbox"
+                      id="ejercicioCompletado"
+                      checked={ejercicioCompletado}
+                      onChange={e => setEjercicioCompletado(e.target.checked)}
+                    />
+                  </label>
+                </div>
+
+                <button onClick={handleSubmit} className="submit-progreso">
+                  Registrar Progreso
+                </button>
+              </section>
+
+              {mostrarHistorial && (
+                <section className="lista-progresos">
+                  <h3>Historial</h3>
+                  {progresos.length === 0 ? (
+                    <p>No hay progresos registrados.</p>
+                  ) : (
+                    <>
+                      {progresos.map(p => (
+                        <div key={p.fecha + p.avancePorcentaje} className="progreso-item">
+                          <p><strong>{p.fecha}</strong></p>
+                          <p>{p.descripcion}</p>
+                          <div className="barra-externa">
+                            <div
+                              className="barra-interna"
+                              style={{ width: `${p.avancePorcentaje}%` }}
+                            >
+                              {p.avancePorcentaje}%
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </>
-                )}
-              </section>
-            )}
+                      ))}
+                    </>
+                  )}
+                </section>
+              )}
 
-            <div className="grafico-progreso" style={{ marginTop: mostrarHistorial ? '2rem' : 0 }}>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart
-                  data={dataChart}
-                  margin={{ top: 30, right: 30, left: 20, bottom: 10 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="fecha" />
-                  <YAxis domain={[0, 100]} />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="avance"
-                    stroke="#00bfa5"
-                    strokeWidth={3}
-                    dot={{ r: 5 }}
-                    label={renderCustomizedLabel}
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </main>
+              <div className="grafico-progreso" style={{ marginTop: mostrarHistorial ? '2rem' : 0 }}>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart
+                    data={dataChart}
+                    margin={{ top: 30, right: 30, left: 20, bottom: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="fecha" />
+                    <YAxis domain={[0, 100]} />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="avance"
+                      stroke="#00bfa5"
+                      strokeWidth={3}
+                      dot={{ r: 5 }}
+                      label={renderCustomizedLabel}
+                      activeDot={{ r: 8 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </main>
+          </div>
         </div>
       </div>
       <Footer />

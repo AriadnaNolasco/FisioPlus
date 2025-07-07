@@ -1,21 +1,19 @@
+/* Estilo para el fondo de la página principal (Home) */
 .homepage-background {
-  background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
   background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
-    background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
-
+  background-attachment: fixed;
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+  margin: 0; /* Elimina márgenes adicionales */
+  padding: 0; /* Elimina padding adicional */
 }
-
-
 
 /* Contenedor general */
 .homepage-container {
   margin: 0;
   padding: 0;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100vh; /* Ajuste para cubrir toda la altura */
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
@@ -29,13 +27,16 @@
   margin: 100px auto 0;
 }
 
-
-
 /* Navegación */
 .homepage-nav {
   display: flex;
   gap: 0.8rem;
   align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff; /* opcional si quieres un fondo blanco */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* una ligera sombra para separación */
+  margin-bottom: 1.5rem; /* separa visualmente el navbar del contenido */
+  border-radius: 0 0 12px 12px; /* borde inferior redondeado opcional */
 }
 
 .homepage-nav a {
@@ -61,16 +62,17 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem 1rem;
+  gap: 5rem;
+  width: 50%; /* Puedes ajustar aquí */
+  padding: 2rem 0.5rem;
   background-color: #f7fafa;
-  border-radius: 16px;
+  border-radius: 90px;
   margin-bottom: 2rem;
 }
 
 .welcome-image {
-  flex: 1;
-  max-width: 480px;
+  flex: 18;
+  max-width: 500px;
 }
 
 .hero-image {
@@ -85,7 +87,7 @@
 
 .welcome-text {
   flex: 1;
-  min-width: 260px;
+  min-width: 2660px;
   max-width: 500px;
   text-align: left;
 }
@@ -106,7 +108,6 @@
   color: #555;
 }
 
-/* Acceso rápido */
 .quick-access {
   display: flex;
   justify-content: center;
@@ -114,9 +115,12 @@
   gap: 1.5rem;
   padding: 1.5rem;
   background-color: #fff;
-  width: 100%;
-  border-radius: 16px;
+  width: 100%; /* Puedes ajustar aquí */
+  max-width: 1200px; /* O limitar el máximo si lo deseas */
+  border-radius: 50px;
+  margin-bottom: 3rem;
 }
+
 
 .access-card {
   display: flex;
@@ -153,7 +157,7 @@
 /* Footer */
 .homepage-footer {
   text-align: center;
-  padding: 0.8rem;
+  padding: 1.5rem;
   background: #f0f0f0;
   font-size: 0.85rem;
   width: 100%;
@@ -189,41 +193,38 @@
   margin-bottom: 0.6rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .homepage-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .homepage-nav {
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .quick-access {
-    padding: 1rem;
-  }
-
-  .access-card {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .welcome-section {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .welcome-text {
-    text-align: center;
-  }
-
-  .hero-image {
-    max-height: 220px;
-  }
+/* Carrusel de imágenes en la sección de bienvenida */
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh; /* Ajusta la altura del contenedor del carrusel */
+  overflow: hidden;
+  margin-bottom: 0;
 }
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-wrapper img {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa toda la altura disponible */
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  border-radius: 0;
+}
+
+/* Estilo para las imágenes dentro del carrusel */
+.hero-image {
+  width: 100%;
+  height: 80%; /* Ajusta la altura de la imagen para que no ocupe toda la pantalla */
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  border-radius: 0;
+}
+
+/* Estilo para la sección del chatbot */
 .chatbot-section {
   margin-top: 30px;
   padding: 20px;
@@ -273,14 +274,14 @@ button {
 button:hover {
   background-color: #009c8c;
 }
+
 /* Personalización del calendario */
 .react-calendar {
-  background-color: #ffffff;  /* Fondo blanco para el calendario */
-  border-radius: 10px;         /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra sutil */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de las celdas del calendario */
 .react-calendar__tile {
   border-radius: 8px;
   font-size: 1rem;
@@ -289,199 +290,33 @@ button:hover {
 }
 
 .react-calendar__tile:hover {
-  background-color: #00bfa5;  /* Color cuando pasas el ratón sobre una celda */
-  color: white;               /* Texto blanco cuando está en hover */
+  background-color: #00bfa5;
+  color: white;
 }
 
 .react-calendar__tile--active {
-  background-color: #00796b;  /* Color para el día seleccionado */
+  background-color: #00796b;
   color: white;
 }
 
 .react-calendar__month-view__days__day {
-  color: #333;  /* Color para los días de la semana */
+  color: #333;
 }
 
-/* Estilo de los días inactivos (del mes anterior o posterior) */
 .react-calendar__tile--off {
   color: #b0b0b0;
 }
 
-/* Resaltar los fines de semana */
 .react-calendar__tile--weekend {
   background-color: #f0f0f0;
-  color: #d32f2f;  /* Color rojo para los fines de semana */
+  color: #d32f2f;
 }
 
-/* Color del encabezado (nombre de los días de la semana) */
 .react-calendar__month-view__weekdays__weekday {
-  color: #16243b; /* Color para los días de la semana (lunes, martes, etc.) */
+  color: #16243b;
   font-weight: bold;
 }
 
-/* Estilo para el contenedor del checkbox (alineación y espaciado) */
 .opciones input[type="checkbox"] {
   margin: 0;
-}
-/* Navegación */
-.homepage-nav {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff; /* opcional si quieres un fondo blanco */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* una ligera sombra para separación */
-  margin-bottom: 1.5rem; /* ← separa visualmente el navbar del contenido */
-  border-radius: 0 0 12px 12px; /* borde inferior redondeado opcional */
-}
-
-.homepage-nav a {
-  text-decoration: none;
-  color: #099;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.logout-button {
-  background-color: hsl(340, 82%, 52%);
-  border: none;
-  color: white;
-  padding: 0.35rem 0.8rem;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-/* Fondo de la página principal (Home) */
-.homepage-background {
-  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
-  background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
-}
-
-/* Carrusel de imágenes en la sección de bienvenida */
-.carousel-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-}
-
-.carousel-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.carousel-wrapper {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-/* Efectos para las imágenes */
-.carousel-wrapper:hover {
-  transform: scale(1.1);
-}
-/* Contenedor de las opciones */
-.quick-access {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background-color: #fff;
-  width: 100%;
-  border-radius: 16px;
-  margin-bottom: 3rem; /* Aumenta el margen inferior */
-}
-
-/* Footer */
-.homepage-footer {
-  text-align: center;
-  padding: 1.5rem; /* Aumenta el padding para más espacio */
-  background: #f0f0f0;
-  font-size: 0.85rem;
-  width: 100%;
-  margin-top: 2rem; /* Ajusta el margen superior si es necesario */
-}
-
-/* Asegúrate de que el fondo principal no se solape con el contenido */
-.homepage-container {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  min-height: calc(100vh - 150px); /* Ajusta el alto para que no se solape con el footer */
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  flex-direction: column;
-}
-/* Estilo para el carrusel */
-.welcome-image {
-  width: 100%;
-  height: 400px; /* Altura fija para el carrusel */
-  overflow: hidden;
-  position: relative;
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Asegura que las imágenes se ajusten sin distorsionarse */
-  border-radius: 12px;
-}
-
-/* Configuración de los botones del carrusel */
-.slick-prev, .slick-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 20px;
-  border-radius: 50%;
-  padding: 10px;
-  z-index: 1;
-}
-
-.slick-prev {
-  left: 10px; /* Ajusta la posición del botón previo */
-}
-
-.slick-next {
-  right: 10px; /* Ajusta la posición del botón siguiente */
-}
-
-/* Estilo para el punto de navegación */
-.slick-dots {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex !important;
-  justify-content: center;
-}
-
-.slick-dots li button {
-  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo de los puntos */
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-}
-
-.slick-dots li.slick-active button {
-  background-color: #00bfa5; /* Color de los puntos activos */
-}
-
-/* Ajustes para hacer que el carrusel sea responsivo */
-@media (max-width: 768px) {
-  .hero-image {
-    height: 300px; /* Reduce la altura en pantallas pequeñas */
-  }
 }
