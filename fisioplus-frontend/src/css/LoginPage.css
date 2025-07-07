@@ -35,7 +35,7 @@ html, body {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #00c6c6;
+  background-color: #0071a6;
   color: white;
   padding: 10px 16px;
   border-radius: 8px;
@@ -168,7 +168,7 @@ html, body {
 
 .login-fields input:focus {
   outline: none;
-  border-color: #00c6c6;
+  border-color: #0071a6;
 }
 
 /* ------------------------------
@@ -180,7 +180,7 @@ html, body {
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background-color: #00c6c6;
+  background-color: #0071a6;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -188,7 +188,7 @@ html, body {
 }
 
 .primary-button:hover {
-  background-color: #00b0b0;
+  background-color: #045273;
 }
 
 /* ------------------------------
@@ -269,7 +269,7 @@ html, body {
 }
 
 .register-link a {
-  color: #00c6c6;
+  color: #0071a6;
   font-weight: bold;
   text-decoration: none;
 }

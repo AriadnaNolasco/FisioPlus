@@ -83,12 +83,12 @@ html, body {
 }
 
 .form-section button[type="submit"] {
-  background-color: #00c6c6;
+  background-color: #0071a6;
   color: #fff;
 }
 
 .form-section button[type="submit"]:hover {
-  background-color: #00b0b0;
+  background-color: #045273;
 }
 
 .form-section button[type="button"] {
@@ -128,7 +128,7 @@ html, body {
 }
 
 .login-link a {
-  color: #00c6c6;
+  color: #0071a6;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -149,7 +149,7 @@ html, body {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #00c6c6;
+  background-color: #0071a6;
   color: white;
   padding: 10px 16px;
   border-radius: 8px;
@@ -164,7 +164,7 @@ html, body {
 
 
 .back-home-button:hover {
-  background-color: #00b0b0;
+  background-color: #045273;
 }
 
 .home-icon {
