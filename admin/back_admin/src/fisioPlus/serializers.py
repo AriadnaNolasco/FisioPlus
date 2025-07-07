@@ -69,3 +69,14 @@ class HorarioDisponibleSerializer(serializers.ModelSerializer):
 
         return data
 
+
+# Para el paciente (solo lectura, sin passwords ni validaciones)
+class PublicTerapeutaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Terapeuta
+        fields = ('id', 'first_name', 'last_name', 'especialidad')
+
+class PublicHorarioDisponibleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HorarioDisponible
+        fields = ('id', 'dia_semana', 'hora_inicio', 'hora_fin', 'terapeuta')

@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import axiosSpring from '../api/axiosSpring'; // 👉 para backend Spring
 import { obtenerTerapeutas } from '../api/terapeutaService'; // 👉 para backend Django
+import axiosDjango from '../api/axiosDjango';
 import { AuthContext } from '../auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -53,24 +54,28 @@ const CitasPage = () => {
 
   // Obtener horarios por terapeuta y fecha
   useEffect(() => {
-    if (nuevaCita.terapeutaId && nuevaCita.fecha) {
-      const diaSemana = new Date(nuevaCita.fecha)
-        .toLocaleDateString('en-US', { weekday: 'long' })
-        .toUpperCase();
+  if (nuevaCita.terapeutaId && nuevaCita.fecha) {
+    console.log("Buscando horarios para terapeuta ID:", nuevaCita.terapeutaId);
 
-      const token = localStorage.getItem('token');
+    const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
+    const dia = new Date(nuevaCita.fecha).getDay(); // 0 = domingo, 1 = lunes, ...
+    const diaSemana = diasSemana[dia];
+    console.log("Día de la semana detectado:", diaSemana);
 
-      axiosDjango.get(`/horarios/?terapeuta=${nuevaCita.terapeutaId}`)
-        .then(res => {
-          const data = res.data;
-          const horariosDelDia = data.filter(h => h.dia_semana === diaSemana);
-          setHorarios(horariosDelDia);
-        })
-        .catch(err => console.error('❌ Error al obtener horarios', err));
-    } else {
-      setHorarios([]);
-    }
-  }, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+    axiosDjango
+      .get(`/horarios/?terapeuta=${nuevaCita.terapeutaId}`)
+      .then(res => {
+        console.log("Horarios recibidos:", res.data);
+        const horariosDelDia = res.data.filter(h => h.dia_semana === diaSemana);
+        setHorarios(horariosDelDia);
+      })
+      .catch(err => console.error('❌ Error al obtener horarios', err));
+  } else {
+    setHorarios([]);
+  }
+}, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+
+
 
   const agruparHorarios = () => {
     const grupos = { mañana: [], tarde: [] };
