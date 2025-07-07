@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, getCurrentUser } from '../services/authService';
 
-import '../assets/styles/auth.css';
+import '../assets/styles/LogReg.css';
 import useAuthStore from '../store/authStore';
 
 export default function LoginPage() {
@@ -31,18 +31,31 @@ export default function LoginPage() {
         }
     };
 
-    return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <h2>Iniciar Sesión</h2>
-                <form onSubmit={handleSubmit}>
-                    <input name="username" onChange={handleChange} placeholder="Usuario" required />
-                    <input name="password" type="password" onChange={handleChange} placeholder="Contraseña" required />
-                    <button type="submit">Ingresar</button>
-                </form>
-                <div className="link">
-                    <span>¿No tienes cuenta? </span>
-                    <Link to="/register">Regístrate</Link>
+ return (
+        <div className="login-page">
+            <div className="auth-container">
+                <div className="auth-card">
+                    <h2>Iniciar Sesión</h2>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            name="username"
+                            onChange={handleChange}
+                            placeholder="Usuario"
+                            required
+                        />
+                        <input
+                            name="password"
+                            type="password"
+                            onChange={handleChange}
+                            placeholder="Contraseña"
+                            required
+                        />
+                        <button type="submit">Ingresar</button>
+                    </form>
+                    <div className="link">
+                        <span>¿No tienes cuenta? </span>
+                        <Link to="/register">Regístrate</Link>
+                    </div>
                 </div>
             </div>
         </div>
