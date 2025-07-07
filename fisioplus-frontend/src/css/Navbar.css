@@ -15,17 +15,15 @@
   font-weight: 400;
 }
 
-
-
 /************ Navbar Css ************/
 nav.navbar {
-  padding: 18px 0;
+  padding: 10px 0; /* Altura reducida */
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 9999;
   transition: 0.32s ease-in-out;
-  background-color: transparent;
+  background-color: rgba(18, 94, 108, 0.4); /* Color más oscuro */
   color: #fff;
 }
 
@@ -52,28 +50,38 @@ nav.navbar.scrolled .navbar-link {
 nav.navbar a.navbar-brand {
   width: 9%;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px; /* Reducido el tamaño del logo */
 }
 
 /************ Enlaces de navegación ************/
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
   letter-spacing: 0.8px;
-  padding: 0 25px;
-  font-size: 18px;
+  padding: 0 20px; /* Ajusté el padding para mejor alineación */
+  font-size: 16px; /* Reducido el tamaño de la fuente */
   opacity: 0.75;
-  
+  transition: all 0.3s ease-in-out;
 }
 
+/* Estilo para cuando se hace hover o se activa el enlace */
 nav.navbar .navbar-nav .nav-link.navbar-link:hover,
 nav.navbar .navbar-nav .nav-link.navbar-link.active {
   opacity: 1;
+  color: #ff7f00; /* Color del texto activo */
+  font-weight: 600; /* Poner en negrita el texto activo */
+  border-bottom: 3px solid #ffffff; /* Subrayado blanco */
+}
+
+/* Estilo para la pestaña activa que siempre estará subrayada */
+nav.navbar .navbar-nav .nav-link.navbar-link.active {
+  border-bottom: 3px solid #ffffff; /* Subrayado blanco permanente */
+  color: #ff7f00; /* Color del texto activo */
+  font-weight: 600; /* Poner en negrita el texto activo */
 }
 
 span.navbar-text {
   display: flex;
   align-items: center;
-  
 }
 
 /************ Íconos sociales (opcional) ************/
@@ -125,13 +133,14 @@ span.navbar-text {
 .navbar-text button {
   font-weight: 700;
   color: #fff;
-  border: 1px solid #fff;
-  padding: 18px 34px;
-  font-size: 18px;
+  border: 2px solid #fff; /* Borde más grueso */
+  padding: 12px 28px; /* Ajustado el padding para un botón más pequeño */
+  font-size: 16px; /* Reducido el tamaño de la fuente */
   margin-left: 18px;
   position: relative;
   background-color: transparent;
-  transition: 0.3s ease-in-out;
+  border-radius: 30px; /* Bordes redondeados */
+  transition: all 0.3s ease-in-out; /* Transición suave para todos los efectos */
 }
 
 .navbar.scrolled .navbar-text button {
@@ -152,17 +161,28 @@ span.navbar-text {
   left: 0;
   top: 0;
   z-index: -1;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .navbar-text button:hover {
-  color: #121212;
+  color: #fff;
+  background-color: #121212; /* Color de fondo al hacer hover */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Sombra sutil al pasar el ratón */
 }
 
 .navbar-text button:hover::before {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+
+.navbar-text button:focus {
+  outline: none; /* Eliminar contorno predeterminado */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /* Sombra al enfocarse */
+}
+
+.navbar-text button:active {
+  transform: scale(0.98); /* Efecto de presionar el botón */
 }
 
 /************ Botón hamburguesa personalizado ************/
@@ -224,8 +244,32 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-color: transparent;
 }
 
-
 nav.navbar,
 nav.navbar * {
   font-family: 'Centra', sans-serif;
+}
+/************ Enlaces de navegación ************/
+nav.navbar .navbar-nav .nav-link.navbar-link {
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  padding: 0 20px; /* Ajusté el padding para mejor alineación */
+  font-size: 16px; /* Reducido el tamaño de la fuente */
+  opacity: 0.75;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Estilo para cuando se hace hover o se activa el enlace */
+nav.navbar .navbar-nav .nav-link.navbar-link:hover,
+nav.navbar .navbar-nav .nav-link.navbar-link.active {
+  opacity: 1;
+  color: #ff7f00; /* Color del texto activo */
+  font-weight: 600; /* Poner en negrita el texto activo */
+  border-bottom: 3px solid #ffffff; /* Subrayado blanco */
+}
+
+/* Estilo para la pestaña activa que siempre estará subrayada */
+nav.navbar .navbar-nav .nav-link.navbar-link.active {
+  border-bottom: 3px solid #ffffff; /* Subrayado blanco permanente */
+  color: #ff7f00; /* Color del texto activo */
+  font-weight: 600; /* Poner en negrita el texto activo */
 }
