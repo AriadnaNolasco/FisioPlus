@@ -159,3 +159,14 @@
   color: white;
   font-family: 'Poppins', sans-serif;
 }
+/* Fondo general de la página de perfil */
+.perfil-page-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  padding: 4rem 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}

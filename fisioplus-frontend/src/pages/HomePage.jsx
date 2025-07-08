@@ -33,7 +33,7 @@ const HomePage = () => {
           <div className="page-wrapper">
             {/* Contenido principal */}
             <main className="homepage-main">
-              {/* Sección de bienvenida */}
+              {/* Sección de carrusel */}
               <section className="welcome-section">
                 <div className="welcome-image">
                   <Slider {...settings}>
@@ -67,12 +67,6 @@ const HomePage = () => {
                       />
                     </div>
                   </Slider>
-                </div>
-                <div className="welcome-text">
-                  <h2>
-                    Bienvenido, <span>{userName}</span>
-                  </h2>
-                  <p>Tu portal de salud y bienestar personalizado</p>
                 </div>
               </section>
 

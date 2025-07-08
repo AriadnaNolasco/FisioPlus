@@ -31,7 +31,7 @@ const NavbarComponent = () => {
   };
 
   const handleLogoClick = () => {
-    auth ? navigate("/home") : navigate("/");
+    auth ? navigate("/home") : navigate("/"); 
   };
 
   const onUpdateActiveLink = (value) => {
@@ -83,13 +83,7 @@ const NavbarComponent = () => {
                 >
                   Progreso
                 </Nav.Link>
-                <Nav.Link
-                  as="button"
-                  onClick={handleLogout}
-                  className="btn btn-outline-danger ms-2"
-                >
-                  Cerrar sesión
-                </Nav.Link>
+                {/* El botón "Cerrar sesión" ha sido eliminado */}
               </>
             ) : (
               <>

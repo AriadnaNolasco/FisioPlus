@@ -1,21 +1,47 @@
-/* Contenedor principal de la página */
-.progreso-container {
-  padding: 2rem;
-  max-width: 900px;
-  margin: 100px auto 50px auto; /* espacio con navbar */
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Fondo general de la página (degradado azul) */
+.homepage0-background {
+  background-image: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-attachment: fixed;
+  width: 100%;
+  padding-top: 0.05rem; /* Reducción para acercar el contenido al navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea el contenido al inicio */
+  flex-direction: column;
 }
 
+/* Contenedor principal de la página de progreso */
+.progreso-container {
+  padding: 3rem;
+  max-width: 900px;
+  margin: 20px auto; /* Reduce el margen superior para acercar el contenido */
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.progreso-container:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el formulario de progreso */
 .formulario-progreso {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
 }
 
+/* Estilos para las opciones */
 .opciones {
   display: flex;
   flex-wrap: wrap;
@@ -24,13 +50,16 @@
   margin-bottom: 1rem;
 }
 
+/* Estilos para los títulos de las opciones */
 .opciones h4 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
   color: #16243b;
   text-align: center;
+  font-weight: bold;
 }
 
+/* Estilos para las opciones dentro del contenedor */
 .opcion {
   padding: 12px 20px;
   background-color: #f0f0f0;
@@ -55,21 +84,25 @@
   font-weight: bold;
 }
 
-.avance-label {
-  text-align: center;
-  font-weight: bold;
-}
-
+/* Estilos para los inputs de avance */
 .avance-label input,
 input[type="number"] {
   margin-left: 10px;
-  width: 70px;
-  padding: 5px;
+  width: 80px;
+  padding: 8px;
   border-radius: 8px;
   border: 1px solid #ccc;
   text-align: center;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
 }
 
+.avance-label input:focus {
+  border-color: #00bfa5;
+  background-color: #e0f7fa;
+}
+
+/* Estilos para el botón de progreso */
 .submit-progreso {
   align-self: center;
   padding: 12px 30px;
@@ -86,6 +119,7 @@ input[type="number"] {
   background: #004d40;
 }
 
+/* Estilos para la lista de progresos */
 .lista-progresos {
   margin-top: 3rem;
 }
@@ -97,6 +131,7 @@ input[type="number"] {
   color: #16243b;
 }
 
+/* Estilos para cada ítem de progreso */
 .progreso-item {
   background: #f9f9f9;
   padding: 1.5rem;
@@ -106,6 +141,7 @@ input[type="number"] {
   color: #2c3e50;
 }
 
+/* Estilos para la barra de progreso externa */
 .barra-externa {
   background: #e0e0e0;
   border-radius: 12px;
@@ -114,6 +150,7 @@ input[type="number"] {
   margin-top: 0.5rem;
 }
 
+/* Estilos para la barra de progreso interna */
 .barra-interna {
   background: linear-gradient(90deg, #4caf50, #81c784);
   height: 100%;
@@ -125,108 +162,43 @@ input[type="number"] {
   border-radius: 12px 0 0 12px;
 }
 
-/* Gráfica de progreso */
+/* Estilos para el gráfico */
 .grafico-progreso {
   height: 300px;
   margin-top: 40px;
 }
 
-/* Etiqueta "ANÓMALO" en la gráfica */
-.label-anomalous {
-  fill: red;
-  font-size: 12px;
-  font-weight: bold;
-  text-anchor: middle;
-}
-
-/* Responsive */
-@media screen and (max-width: 600px) {
-  .opciones {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .opcion {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .submit-progreso {
-    width: 100%;
-  }
-}
-
-.homepage1-background {
-  background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* ← Asegura que cubra toda la altura visible */
-  background-attachment: fixed; /* ✅ Esta línea hace que la imagen esté fija al hacer scroll */
-}
-
-/* Estilos para el botón de "Mostrar Historial" */
-.mostrar-historial-btn {
-  padding: 6px 12px; /* Tamaño reducido */
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
-  background-color: #00bfa5;
-  color: white;
-  border: none;
+/* Estilos para el checkbox "Ejercicio completado" */
+input[type="checkbox"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #00796b;
   border-radius: 5px;
+  background-color: #fff;
+  position: relative;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: auto;
-  display: inline-block;
-  text-align: center;
-  float: right; /* Mueve el botón a la derecha */
+  transition: all 0.3s ease;
 }
 
-.mostrar-historial-btn:hover {
-  background-color: #008c74;
+input[type="checkbox"]:checked {
+  background-color: #00bfa5;
+  border-color: #00bfa5;
 }
 
-/* Ajustes al diseño del contenedor y los filtros */
-.progreso-container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 3px;
 }
 
-.opciones {
-  margin-bottom: 1.5rem;
-}
-
-.opciones h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-select {
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-/* Ajustes al botón de "Registrar Progreso" */
-.submit-progreso {
-  background-color: #009ca8;
-  color: white;
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-progreso:hover {
-  background-color: #007f89;
+input[type="checkbox"]:hover {
+  border-color: #004d40;
 }
 
 /* Estilos generales */
@@ -273,7 +245,7 @@ select {
   color: white;
   padding: 9px 10px;
   font-size: 1.1rem;
-  border-radius: 8px;
+  border-radius: 90px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 20%;
@@ -326,316 +298,190 @@ select {
   padding-top: 1rem;
   border-top: 2px solid #eee;
 }
-/* Estilos para el botón de "Mostrar Historial" */
-.mostrar-historial-btn {
-  padding: 6px 12px; /* Tamaño reducido */
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
-  background-color: #00bfa5;
+
+/* Estilo general del calendario */
+.react-calendar {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect para el calendario */
+.react-calendar:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la vista de navegación (mes y año) */
+.react-calendar__navigation {
+  background-color: #acacd7; /* Color morado suave */
+  border-radius: 12px;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  width: auto;
-  display: inline-block;
-  float: right; /* Asegura que el botón esté en la esquina derecha */
-  margin-top: 0.5rem; /* Añadido margen para separación visual */
-}
-
-.mostrar-historial-btn:hover {
-  background-color: #008c74;
-}
-
-/* Si el contenedor tiene espacio alrededor, añadir un margen adicional para asegurar que el botón se posicione bien */
-.progreso-container .mostrar-historial-btn {
-  margin-left: auto;
-}
-/* Estilo para los filtros y sus etiquetas */
-.opciones {
-  display: flex;
-  flex-direction: column; /* Asegura que los elementos estén en una columna */
-  gap: 12px;
-  justify-content: flex-start; /* Alinea todos los elementos hacia la izquierda */
-  margin-bottom: 1rem;
-}
-
-.opciones h4 {
-  margin-bottom: 0.5rem;
+  padding: 1px;
   font-size: 1.2rem;
-  color: #16243b;
-  text-align: left; /* Alinea el texto a la izquierda */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Estilo para los selects, asegurando que estén alineados a la izquierda */
-.opciones select {
-  padding: 10px;
-  width: 100%; /* Asegura que los selects tengan el 100% del ancho del contenedor */
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  text-align: left; /* Alinea el texto dentro del select a la izquierda */
-}
-
-/* Botón de "Mostrar Historial" */
-.mostrar-historial-btn {
-  padding: 6px 12px;
-  font-size: 0.9rem;
-  background-color: #00bfa5;
+/* Estilo para el mes y el año */
+.react-calendar__navigation__label {
   color: white;
+  font-weight: none;
+}
+
+/* Estilo para las flechas de navegación */
+.react-calendar__navigation button {
+  color: white;
+  font-size: 1.5rem;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+}
+
+/* Estilo para los días de la semana */
+.react-calendar__month-view__weekdays {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4caf50; /* Color verde */
+  display: flex;
+  justify-content: space-between;
   text-align: center;
-  width: auto;
-  display: inline-block;
-  float: right; /* Asegura que el botón esté a la derecha */
-  margin-top: 0.5rem;
+  margin-bottom: 10px;
 }
 
-.mostrar-historial-btn:hover {
-  background-color: #008c74;
-}
-
-/* Contenedor para el calendario */
-.calendar-container {
-  margin-bottom: 1rem;
+/* Estilo para los días del calendario */
+.react-calendar__month-view__days__day {
+  color: #333;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   justify-content: center;
-}
-
-/* Estilo de los filtros en móvil para que se alineen bien */
-@media screen and (max-width: 600px) {
-  .opciones {
-    align-items: flex-start; /* Alinea los filtros a la izquierda en pantallas pequeñas */
-  }
-
-  .submit-progreso {
-    width: 100%;
-  }
-
-  .calendar-container {
-    width: 100%;
-  }
-}
-.react-calendar__navigation button {
-  color: #000; /* Asegura que los botones de navegación sean visibles */
-}
-
-/* Estilos del botón de "Registrar Progreso" */
-.submit-progreso {
-  background-color: #009ca8;
-  color: white;
-  padding: 9px 10px;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 20%;
-  display: inline-block;
-}
-
-.submit-progreso:hover {
-  background-color: #007f89;
-}
-/* Estilo para la etiqueta de ejercicio completado */
-label[for="ejercicioCompletado"] {
-  font-size: 1.1rem;
-  color: #16243b;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: flex;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
 }
 
-/* Estilos personalizados para el checkbox */
-input[type="checkbox"] {
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border: 2px solid #00796b;
-  border-radius: 5px;
-  background-color: #fff;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Estilo para el día seleccionado */
+.react-calendar__month-view__days__day--selected {
+  background-color: #9c27b0; /* Color morado para el día seleccionado */
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
 }
 
-/* Estilo para cuando el checkbox está marcado */
-input[type="checkbox"]:checked {
-  background-color: #00bfa5;
-  border-color: #00bfa5;
-}
-
-input[type="checkbox"]:checked::before {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 3px;
-}
-
-/* Efecto hover */
-input[type="checkbox"]:hover {
-  border-color: #004d40;
-}
-
-/* Estilo para el contenedor del checkbox (alineación y espaciado) */
-.opciones input[type="checkbox"] {
-  margin: 0;
-}
-/* Contenedor principal de la página */
-.citas-container {
-  max-width: 900px;
-  margin: 100px auto 50px auto; /* espacio con navbar */
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Estilo para el título principal */
-.citas-container h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #00796b;
+/* Estilo para los días del fin de semana (sábado y domingo) */
+.react-calendar__month-view__days__day--weekend {
+  color: #e53935; /* Color rojo */
   font-weight: bold;
 }
 
-/* Estilo del formulario */
-.cita-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+/* Estilo para los días del mes anterior y siguiente */
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #b0bec5;
 }
 
-/* Estilo de los campos de entrada */
-.cita-form input {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  width: 100%;
-  background-color: #f9f9f9;
-  transition: all 0.3s ease;
-}
-
-/* Efecto hover en los campos de entrada */
-.cita-form input:focus {
-  border-color: #00bfa5;
-  outline: none;
-  background-color: #e0f7fa;
-}
-
-/* Botón de Agendar Cita */
-.cita-form button {
-  padding: 12px 30px;
-  background: #00796b;
+/* Estilo para el día actual */
+.react-calendar__month-view__days__day--today {
+  background-color: #00bfa5;
   color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+/* Etiqueta "ANÓMALO" en la gráfica */
+.label-anomalous {
+  fill: rgb(181, 72, 72);
+  font-size: 12px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+/* Estilo para el calendario móvil */
+@media (max-width: 600px) {
+  .react-calendar {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .react-calendar__navigation {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .react-calendar__month-view__weekdays {
+    flex-direction: column;
+  }
+
+  .react-calendar__month-view__days__day {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+/* Traducción de los días de la semana */
+.react-calendar__month-view__weekdays__weekday {
   font-size: 1rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  align-self: center;
-  margin-top: 1rem;
+  font-weight: bold;
 }
 
-.cita-form button:hover {
-  background: #004d40;
+.react-calendar__month-view__weekdays__weekday:nth-child(1) {
+  content: "Lun";
 }
 
-/* Estilo para las citas listadas */
-.citas-list {
-  margin-top: 2rem;
-  padding: 0;
-  list-style: none;
+.react-calendar__month-view__weekdays__weekday:nth-child(2) {
+  content: "Mar";
 }
 
-/* Estilo para cada cita */
-.cita-item {
-  background: #f9f9f9;
-  padding: 1rem;
-  border-radius: 15px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  color: #2c3e50;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.react-calendar__month-view__weekdays__weekday:nth-child(3) {
+  content: "Mié";
 }
 
-/* Título de la cita */
-.cita-item strong {
-  font-size: 1.1rem;
-  color: #00796b;
+.react-calendar__month-view__weekdays__weekday:nth-child(4) {
+  content: "Jue";
 }
 
-/* Estilo para los botones de Editar y Cancelar */
-.cita-item button {
-  padding: 8px 16px;
-  background-color: #f0f0f0;
-  color: #00796b;
-  border: 1px solid #00796b;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.react-calendar__month-view__weekdays__weekday:nth-child(5) {
+  content: "Vie";
 }
 
-.cita-item button:hover {
-  background-color: #00796b;
-  color: white;
+.react-calendar__month-view__weekdays__weekday:nth-child(6) {
+  content: "Sáb";
 }
 
-.cita-item button:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
+.react-calendar__month-view__weekdays__weekday:nth-child(7) {
+  content: "Dom";
 }
-
-/* Estilo para la alerta de error */
-.error-message {
-  color: #d32f2f;
-  font-size: 1rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-/* Estilo del fondo de la página */
+/* Fondo general de la página (degradado azul) */
 .homepage0-background {
-  background-image: url('../assets/img/banner-bg.png');
-  background-position: top center;
+  background-image: linear-gradient(to right, #1e3a8a, #38bdf8); /* Degradado azul */
   background-size: cover;
+  background-position: top center;
   background-repeat: no-repeat;
   min-height: 100vh;
   background-attachment: fixed;
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
-/* Diseño para pantallas pequeñas */
-@media screen and (max-width: 600px) {
-  .citas-container {
-    padding: 1rem;
-    margin-top: 50px;
-  }
-
-  .cita-form button {
-    width: 100%;
-  }
-
-  .cita-item {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
+/* Contenedor principal de la página de progreso */
+.progreso-container {
+  padding: 3rem;
+  max-width: 900px;
+  margin: 20px auto;
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
