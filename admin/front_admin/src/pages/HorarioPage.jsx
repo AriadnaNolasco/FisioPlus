@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import api from '../services/api';
-import CrearReglaForm from '../components/CrearReglaForm'; // ruta según organización
-import '../css/MiHorarioPage.css';
+import '../css/HorarioPage.css';
 import { AuthContext } from '../auth/AuthContext';
 import Sidebar from '../components/Sidebar';
 

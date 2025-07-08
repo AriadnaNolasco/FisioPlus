@@ -54,26 +54,47 @@ const CitasPage = () => {
 
   // Obtener horarios por terapeuta y fecha
   useEffect(() => {
-  if (nuevaCita.terapeutaId && nuevaCita.fecha) {
-    console.log("Buscando horarios para terapeuta ID:", nuevaCita.terapeutaId);
+    if (nuevaCita.terapeutaId && nuevaCita.fecha) {
+      console.log("Buscando horarios para terapeuta ID:", nuevaCita.terapeutaId);
 
-    const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
-    const dia = new Date(nuevaCita.fecha).getDay(); // 0 = domingo, 1 = lunes, ...
-    const diaSemana = diasSemana[dia];
-    console.log("Día de la semana detectado:", diaSemana);
+      const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
+      const dia = new Date(nuevaCita.fecha).getDay(); // 0 = domingo, 1 = lunes, ...
+      const diaSemana = diasSemana[dia];
+      console.log("Día de la semana detectado:", diaSemana);
 
-    axiosDjango
-      .get(`/horarios/?terapeuta=${nuevaCita.terapeutaId}`)
-      .then(res => {
-        console.log("Horarios recibidos:", res.data);
-        const horariosDelDia = res.data.filter(h => h.dia_semana === diaSemana);
-        setHorarios(horariosDelDia);
-      })
-      .catch(err => console.error('❌ Error al obtener horarios', err));
-  } else {
-    setHorarios([]);
-  }
-}, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+      // 👇 Aquí va la simulación
+      const horariosMock = [
+        {
+          dia_semana: diaSemana,
+          hora_inicio: '08:00',
+          hora_fin: '12:00'
+        },
+        {
+          dia_semana: diaSemana,
+          hora_inicio: '14:00',
+          hora_fin: '17:00'
+        }
+      ];
+
+      console.log("✅ Simulando horarios para el día:", diaSemana);
+      setHorarios(horariosMock);
+
+      // ❌ Comentamos temporalmente la petición real
+      /*
+      axiosDjango
+        .get(`/horarios/?terapeuta=${nuevaCita.terapeutaId}`)
+        .then(res => {
+          console.log("Horarios recibidos:", res.data);
+          const horariosDelDia = res.data.filter(h => h.dia_semana === diaSemana);
+          setHorarios(horariosDelDia);
+        })
+        .catch(err => console.error('❌ Error al obtener horarios', err));
+      */
+    } else {
+      setHorarios([]);
+    }
+  }, [nuevaCita.terapeutaId, nuevaCita.fecha]);
+
 
 
 
@@ -147,19 +168,25 @@ const CitasPage = () => {
       fechaHora: fechaSeleccionada.toISOString().slice(0, 19)
     };
 
-    axiosSpring.post('/citas', payload)
-      .then(() => {
-        toast.success('✅ ¡Cita agendada con éxito!');
-        setNuevaCita({ motivo: '', fecha: '', hora: '', terapeutaId: '' });
-        fetchCitas();
-      })
-      .catch(err => {
-        if (err.response?.data?.message) {
-          setError(err.response.data.message);
-        } else {
-          setError('Error al agendar la cita.');
-        }
-      });
+    console.log("➡️ Simulando creación de cita con payload:", payload);
+
+    // Simula un retraso de 1 segundo como si esperara la respuesta del backend
+    setTimeout(() => {
+      toast.success('✅ ¡Cita agendada con éxito (simulada)!');
+      setNuevaCita({ motivo: '', fecha: '', hora: '', terapeutaId: '' });
+
+      // Simula una cita agregada a la lista (solo si quieres mostrarla sin fetch real)
+      const citaFalsa = {
+        id: Date.now(), // ID falso único
+        profesional: terapeutas.find(t => t.id == payload.terapeutaId)?.first_name + ' ' +
+          terapeutas.find(t => t.id == payload.terapeutaId)?.last_name,
+        fechaHora: payload.fechaHora,
+        estado: 'CONFIRMADA'
+      };
+
+      setCitas(prev => [...prev, citaFalsa]);
+    }, 1000);
+
   };
 
   const eliminarCita = (id) => {
